@@ -11,6 +11,9 @@
  */
 
 function doPost(e) {
+  // Configurar headers CORS para permitir peticiones desde cualquier origen
+  const output = ContentService.createTextOutput();
+  
   try {
     // Obtener la hoja de cálculo activa
     const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
@@ -53,11 +56,25 @@ function doPost(e) {
         const datos = sheet.getDataRange().getValues();
         // Buscar duplicados (empezar desde la fila 2 porque la fila 1 son encabezados)
         for (let i = 1; i < datos.length; i++) {
-          if (datos[i][4] === fechaCita && datos[i][5] === horaCita) {
-            return ContentService.createTextOutput(JSON.stringify({
+          // Columna 4 = Fecha Cita, Columna 5 = Hora
+          const fechaExistente = datos[i][4];
+          const horaExistente = datos[i][5];
+          
+          // Normalizar formatos de fecha y hora para comparación
+          const fechaCitaNormalizada = fechaCita.toString().trim();
+          const horaCitaNormalizada = horaCita.toString().trim();
+          const fechaExistenteNormalizada = fechaExistente ? fechaExistente.toString().trim() : '';
+          const horaExistenteNormalizada = horaExistente ? horaExistente.toString().trim() : '';
+          
+          if (fechaExistenteNormalizada === fechaCitaNormalizada && 
+              horaExistenteNormalizada === horaCitaNormalizada) {
+            const errorResponse = JSON.stringify({
               'success': false,
               'error': 'Esta fecha y hora ya está reservada. Por favor selecciona otra fecha u hora.'
-            })).setMimeType(ContentService.MimeType.JSON);
+            });
+            output.setContent(errorResponse);
+            output.setMimeType(ContentService.MimeType.JSON);
+            return output;
           }
         }
       }
@@ -102,54 +119,92 @@ function doPost(e) {
     // Agregar la fila a la hoja
     sheet.appendRow(row);
     
-    // Opcional: Enviar email de confirmación
-    // Descomenta y configura si deseas enviar emails automáticos
-    
-    // if (data.tipo === 'registro') {
-    //   MailApp.sendEmail({
-    //     to: data.correo,
-    //     subject: '¡Bienvenido a En Línea Spa!',
-    //     htmlBody: `
-    //       <h2>¡Gracias por registrarte!</h2>
-    //       <p>Hola ${data.nombre},</p>
-    //       <p>Tu código de descuento del 20% es: <strong>SPA20</strong></p>
-    //       <p>Presenta este código al momento de tu cita.</p>
-    //       <p>¡Esperamos verte pronto!</p>
-    //     `
-    //   });
-    // }
-    
-    // if (data.tipo === 'agenda') {
-    //   MailApp.sendEmail({
-    //     to: data.correo,
-    //     subject: 'Confirmación de Cita - En Línea Spa',
-    //     htmlBody: `
-    //       <h2>¡Cita Agendada!</h2>
-    //       <p>Hola ${data.nombre},</p>
-    //       <p>Hemos recibido tu solicitud de cita:</p>
-    //       <ul>
-    //         <li><strong>Fecha:</strong> ${data.fecha}</li>
-    //         <li><strong>Hora:</strong> ${data.hora}</li>
-    //         <li><strong>Servicio:</strong> ${data.servicio}</li>
-    //       </ul>
-    //       <p>Te contactaremos pronto para confirmar tu cita.</p>
-    //       <p>¡Esperamos verte pronto!</p>
-    //     `
-    //   });
-    // }
+    // Enviar email de confirmación
+    try {
+      if (data.tipo === 'registro' && data.correo && data.correo.trim() !== '') {
+        const emailBody = `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f5f5f5;">
+            <div style="background-color: #B19CD9; padding: 20px; text-align: center; border-radius: 10px 10px 0 0;">
+              <h1 style="color: #FFFFFF; margin: 0;">¡Gracias por registrarte!</h1>
+            </div>
+            <div style="background-color: #FFFFFF; padding: 30px; border-radius: 0 0 10px 10px;">
+              <p style="color: #333; font-size: 16px;">Hola <strong>${data.nombre || 'Cliente'}</strong>,</p>
+              <p style="color: #333; font-size: 16px;">¡Bienvenido a En Línea Spa!</p>
+              <p style="color: #333; font-size: 16px;">Tu código de descuento del 10% es:</p>
+              <div style="background-color: #90EE90; padding: 15px; text-align: center; border-radius: 5px; margin: 20px 0;">
+                <p style="color: #000; font-size: 24px; font-weight: bold; margin: 0;">SPA10</p>
+              </div>
+              <p style="color: #333; font-size: 16px;">Presenta este código al momento de tu cita para obtener tu descuento.</p>
+              <p style="color: #333; font-size: 16px;">¡Esperamos verte pronto!</p>
+              <p style="color: #666; font-size: 14px; margin-top: 30px;">Saludos,<br>Equipo En Línea Spa</p>
+            </div>
+          </div>
+        `;
+        
+        MailApp.sendEmail({
+          to: data.correo.trim(),
+          subject: '¡Bienvenido a En Línea Spa!',
+          htmlBody: emailBody
+        });
+        
+        Logger.log('Email de registro enviado a: ' + data.correo);
+      }
+      
+      if (data.tipo === 'agenda' && data.correo && data.correo.trim() !== '') {
+        const emailBody = `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f5f5f5;">
+            <div style="background-color: #B19CD9; padding: 20px; text-align: center; border-radius: 10px 10px 0 0;">
+              <h1 style="color: #FFFFFF; margin: 0;">¡Cita Agendada!</h1>
+            </div>
+            <div style="background-color: #FFFFFF; padding: 30px; border-radius: 0 0 10px 10px;">
+              <p style="color: #333; font-size: 16px;">Hola <strong>${data.nombre || 'Cliente'}</strong>,</p>
+              <p style="color: #333; font-size: 16px;">Hemos recibido tu solicitud de cita:</p>
+              <div style="background-color: #f9f9f9; padding: 20px; border-radius: 5px; margin: 20px 0;">
+                <ul style="color: #333; font-size: 16px; list-style: none; padding: 0;">
+                  <li style="margin-bottom: 10px;"><strong>Fecha:</strong> ${data.fecha || 'No especificada'}</li>
+                  <li style="margin-bottom: 10px;"><strong>Hora:</strong> ${data.hora || 'No especificada'}</li>
+                  <li style="margin-bottom: 10px;"><strong>Servicio:</strong> ${data.servicio || 'No especificado'}</li>
+                </ul>
+              </div>
+              <p style="color: #333; font-size: 16px;">Te contactaremos pronto para confirmar tu cita.</p>
+              <p style="color: #333; font-size: 16px;">¡Esperamos verte pronto!</p>
+              <p style="color: #666; font-size: 14px; margin-top: 30px;">Saludos,<br>Equipo En Línea Spa</p>
+            </div>
+          </div>
+        `;
+        
+        MailApp.sendEmail({
+          to: data.correo.trim(),
+          subject: 'Confirmación de Cita - En Línea Spa',
+          htmlBody: emailBody
+        });
+        
+        Logger.log('Email de cita enviado a: ' + data.correo);
+      }
+    } catch (emailError) {
+      Logger.log('Error al enviar email: ' + emailError.toString());
+      Logger.log('Stack trace: ' + emailError.stack);
+      // No fallar si el email no se envía, pero registrar el error
+    }
     
     // Retornar respuesta exitosa
-    return ContentService.createTextOutput(JSON.stringify({
+    const successResponse = JSON.stringify({
       'success': true,
       'message': 'Datos guardados correctamente'
-    })).setMimeType(ContentService.MimeType.JSON);
+    });
+    output.setContent(successResponse);
+    output.setMimeType(ContentService.MimeType.JSON);
+    return output;
     
   } catch (error) {
     // Retornar respuesta de error
-    return ContentService.createTextOutput(JSON.stringify({
+    const errorResponse = JSON.stringify({
       'success': false,
       'error': error.toString()
-    })).setMimeType(ContentService.MimeType.JSON);
+    });
+    output.setContent(errorResponse);
+    output.setMimeType(ContentService.MimeType.JSON);
+    return output;
   }
 }
 

@@ -1,0 +1,64 @@
+body {
+  margin: 0;
+  font-family: 'Ador Hairline Medium', sans-serif;
+  background: linear-gradient(180deg, #5edd94, #a685c9);
+  color: #2b2b2b;
+  overflow-x: hidden;
+}
+
+.hero {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #5edd94, #a685c9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+
+.hero::before,
+.hero::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  animation: float 8s infinite ease-in-out;
+}
+
+.hero::before {
+  width: 180px;
+  height: 180px;
+  top: 10%;
+  left: -60px;
+}
+
+.hero::after {
+  width: 250px;
+  height: 250px;
+  bottom: -80px;
+  right: -80px;
+  animation-delay: 2s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.hero-content h1 {
+  font-size: 2rem;
+  color: #fff;
+}
+
+.hero-content span {
+  color: #5edd94;
+}
+
+.button {
+  background: #5edd94;
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 40px;
+  text-decoration: none;
+  font-weight: bold;
+}
