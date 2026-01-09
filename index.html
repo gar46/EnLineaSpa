@@ -8,1007 +8,274 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Playfair+Display:wght@300;400;500;600;700;800;900&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav">
-            <div class="nav-container">
-                <div class="logo">
-                    <img src="330. En línea SPA/MARCA DE AGUA/MARCA DE AGUA_Mesa de trabajo 1.png" alt="En Línea Spa Logo" class="logo-img">
-                </div>
-                <button class="menu-toggle" aria-label="Toggle menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-                <ul class="nav-menu">
-                    <li><a href="#inicio" class="nav-link">Inicio</a></li>
-                    <li><a href="#tratamientos-faciales" class="nav-link">Faciales</a></li>
-                    <li><a href="#tratamientos-corporales" class="nav-link">Corporales</a></li>
-                    <li><a href="#masajes" class="nav-link">Masajes</a></li>
-                    <li><a href="#agenda" class="nav-link">Agenda</a></li>
-                    <li><a href="#contacto" class="nav-link">Contacto</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Hero Section - Slider de Videos -->
-    <section id="inicio" class="hero-slider">
-        <div class="hero-slider-container">
-            <div class="hero-slider-track" id="heroSliderTrack">
-                <!-- Slide 1 - Banner de Inicio -->
-                <div class="hero-slide active">
-                    <div class="hero-slide-background">
-                        <img src="330. En línea SPA/images/Banner3Post-(9)_02.jpg" alt="En Línea Spa" class="hero-banner-img">
-                        <div class="hero-slide-overlay"></div>
-                    </div>
-                    <div class="hero-slide-content">
-                        <h1 class="hero-title">En Línea Spa</h1>
-                        <p class="hero-subtitle">Tu bienestar es nuestra prioridad</p>
-                        <a href="#servicios" class="hero-cta-btn">Descubre nuestros servicios</a>
-                    </div>
-                </div>
-
-                <!-- Slide 2 - Video Limpieza Facial -->
-                <div class="hero-slide">
-                    <div class="hero-slide-background">
-                        <video class="hero-video" muted loop playsinline>
-                            <source src="img/videosenlinea/faciales/pagina1.mp4" type="video/mp4">
-                        </video>
-                        <div class="hero-slide-overlay"></div>
-                    </div>
-                    <div class="hero-slide-content">
-                        <h2 class="hero-slide-title">Limpieza Facial Profunda</h2>
-                        <p class="hero-slide-description">Déjanos consentirte con nuestra increíble limpieza facial, que elimina las impurezas y permite que tu piel respire de nuevo.</p>
-                        <div class="video-duration">
-                            <span class="duration-icon">⏱</span>
-                            <span class="duration-text" id="duration1">Cargando...</span>
-                        </div>
-                        <a href="#tratamientos-faciales" class="hero-cta-btn">Ver más</a>
-                    </div>
-                </div>
-
-                <!-- Slide 3 - Video Microagujado y Botox -->
-                <div class="hero-slide">
-                    <div class="hero-slide-background">
-                        <video class="hero-video" muted loop playsinline>
-                            <source src="img/videosenlinea/faciales/pagina2.mp4" type="video/mp4">
-                        </video>
-                        <div class="hero-slide-overlay"></div>
-                    </div>
-                    <div class="hero-slide-content">
-                        <h2 class="hero-slide-title">Microagujado y Botox</h2>
-                        <p class="hero-slide-description">Descubre los increíbles beneficios del microagujado y el botox para una piel radiante y rejuvenecida.</p>
-                        <div class="video-duration">
-                            <span class="duration-icon">⏱</span>
-                            <span class="duration-text" id="duration2">Cargando...</span>
-                        </div>
-                        <a href="#tratamientos-faciales" class="hero-cta-btn">Ver más</a>
-                    </div>
-                </div>
-
-                <!-- Slide 4 - Video HidraGloss -->
-                <div class="hero-slide">
-                    <div class="hero-slide-background">
-                        <video class="hero-video" muted loop playsinline>
-                            <source src="img/videosenlinea/faciales/pagina6.mp4" type="video/mp4">
-                        </video>
-                        <div class="hero-slide-overlay"></div>
-                    </div>
-                    <div class="hero-slide-content">
-                        <h2 class="hero-slide-title">HidraGloss para Labios</h2>
-                        <p class="hero-slide-description">Fórmula ultra-hidratante que nutre y revitaliza tus labios, dejándolos suaves y radiantes.</p>
-                        <div class="video-duration">
-                            <span class="duration-icon">⏱</span>
-                            <span class="duration-text" id="duration3">Cargando...</span>
-                        </div>
-                        <a href="#tratamientos-faciales" class="hero-cta-btn">Ver más</a>
-                    </div>
-                </div>
-
-                <!-- Slide 5 - Video Corporal -->
-                <div class="hero-slide">
-                    <div class="hero-slide-background">
-                        <video class="hero-video" muted loop playsinline>
-                            <source src="img/videosenlinea/corporales/pagina1.mp4" type="video/mp4">
-                        </video>
-                        <div class="hero-slide-overlay"></div>
-                    </div>
-                    <div class="hero-slide-content">
-                        <h2 class="hero-slide-title">Tratamientos Corporales</h2>
-                        <p class="hero-slide-description">Transforma tu cuerpo con nuestros tratamientos especializados para realzar tu belleza natural.</p>
-                        <div class="video-duration">
-                            <span class="duration-icon">⏱</span>
-                            <span class="duration-text" id="duration4">Cargando...</span>
-                        </div>
-                        <a href="#tratamientos-corporales" class="hero-cta-btn">Ver más</a>
-                    </div>
-                </div>
-
-                <!-- Slide 6 - Video Masajes -->
-                <div class="hero-slide">
-                    <div class="hero-slide-background">
-                        <video class="hero-video" muted loop playsinline>
-                            <source src="img/videosenlinea/corporales/pagina3.mp4" type="video/mp4">
-                        </video>
-                        <div class="hero-slide-overlay"></div>
-                    </div>
-                    <div class="hero-slide-content">
-                        <h2 class="hero-slide-title">Masajes de Relajación</h2>
-                        <p class="hero-slide-description">Alivia el estrés y la tensión con nuestros masajes terapéuticos para renovar tu energía.</p>
-                        <div class="video-duration">
-                            <span class="duration-icon">⏱</span>
-                            <span class="duration-text" id="duration5">Cargando...</span>
-                        </div>
-                        <a href="#masajes" class="hero-cta-btn">Ver más</a>
-                    </div>
+    <!-- Slider Fullscreen -->
+    <div class="slider-container">
+        <!-- Burbujas fijas con efecto bokeh -->
+        <div class="bokeh-bubbles">
+            <div class="bokeh-bubble bubble-1"></div>
+            <div class="bokeh-bubble bubble-2"></div>
+            <div class="bokeh-bubble bubble-3"></div>
+            <div class="bokeh-bubble bubble-4"></div>
+            <div class="bokeh-bubble bubble-5"></div>
+            <div class="bokeh-bubble bubble-6"></div>
+            <div class="bokeh-bubble bubble-7"></div>
+            <div class="bokeh-bubble bubble-8"></div>
+            <div class="bokeh-bubble bubble-9"></div>
+            <div class="bokeh-bubble bubble-10"></div>
+            <div class="bokeh-bubble bubble-11"></div>
+            <div class="bokeh-bubble bubble-12"></div>
+        </div>
+        
+        <div class="slider-wrapper">
+            <!-- Slide 1 -->
+            <div class="slide active" data-slide="1">
+                <div class="slide-content">
+                    <h1 class="slide-title">Resalta tu belleza natural</h1>
+                    <p class="slide-subtitle">Limpiezas faciales & rejuvenecimiento</p>
+                    <button class="btn-slide" onclick="abrirModalAgenda()">Reservar ahora</button>
                 </div>
             </div>
-
-            <!-- Controles del Slider -->
-            <div class="hero-slider-controls">
-                <button class="hero-slider-btn prev" id="heroSliderPrev">‹</button>
-                <div class="hero-slider-dots" id="heroSliderDots"></div>
-                <button class="hero-slider-btn next" id="heroSliderNext">›</button>
+            
+            <!-- Slide 2 -->
+            <div class="slide" data-slide="2">
+                <div class="slide-content">
+                    <h1 class="slide-title">Relajación que transforma</h1>
+                    <p class="slide-subtitle">Masajes reductores & bienestar</p>
+                    <button class="btn-slide" onclick="abrirModalAgenda()">Agendar cita</button>
+                </div>
             </div>
+            
+            <!-- Slide 3 -->
+            <div class="slide" data-slide="3">
+                <div class="slide-content">
+                    <h1 class="slide-title">Resultados que se sienten</h1>
+                    <p class="slide-subtitle">Tonificación y levantamiento</p>
+                    <button class="btn-slide" onclick="abrirModalDescuento()">Quiero mi descuento</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Indicadores del slider -->
+        <div class="slider-indicators">
+            <span class="indicator active" data-slide="1"></span>
+            <span class="indicator" data-slide="2"></span>
+            <span class="indicator" data-slide="3"></span>
+        </div>
+        
+        <!-- Botones de navegación -->
+        <button class="slider-nav prev" onclick="changeSlide(-1)">‹</button>
+        <button class="slider-nav next" onclick="changeSlide(1)">›</button>
+    </div>
 
-            <!-- Indicador de slide actual -->
-            <div class="hero-slider-indicator">
-                <span id="currentSlide">1</span> / <span id="totalSlides">6</span>
+    <!-- Sección de Reserva -->
+    <section class="reserva-section">
+        <div class="reserva-bubbles">
+            <div class="reserva-bubble rb-1"></div>
+            <div class="reserva-bubble rb-2"></div>
+            <div class="reserva-bubble rb-3"></div>
+            <div class="reserva-bubble rb-4"></div>
+            <div class="reserva-bubble rb-5"></div>
+            <div class="reserva-bubble rb-6"></div>
+            <div class="reserva-bubble rb-7"></div>
+            <div class="reserva-bubble rb-8"></div>
+        </div>
+        <div class="reserva-content">
+            <h1 class="reserva-title">Resalta tu belleza natural</h1>
+            <p class="reserva-subtitle">Limpiezas faciales & rejuvenecimiento</p>
+            <button class="btn-reserva" onclick="abrirModalAgenda()">Reservar ahora</button>
+        </div>
+        <div class="reserva-wave"></div>
+    </section>
+
+
+    <!-- Sección de Descuento -->
+    <section class="discount-section">
+        <div class="section-bubbles">
+            <div class="section-bubble sb-1"></div>
+            <div class="section-bubble sb-2"></div>
+            <div class="section-bubble sb-3"></div>
+            <div class="section-bubble sb-4"></div>
+            <div class="section-bubble sb-5"></div>
+            <div class="section-bubble sb-6"></div>
+        </div>
+        <h2 class="discount-intro-text">Regístrate y recibe</h2>
+        <span class="discount-amount-large">10% de descuento</span>
+        <p class="discount-condition-text">En cualquiera de nuestros tratamientos</p>
+        <button class="btn-discount" onclick="abrirModalDescuento()">Obtener descuento</button>
+    </section>
+
+    <!-- Sección de Servicios -->
+    <section class="services-section-main">
+        <div class="section-bubbles">
+            <div class="section-bubble sb-1"></div>
+            <div class="section-bubble sb-2"></div>
+            <div class="section-bubble sb-3"></div>
+            <div class="section-bubble sb-4"></div>
+            <div class="section-bubble sb-5"></div>
+            <div class="section-bubble sb-6"></div>
+        </div>
+        <h2 class="services-title">Nuestros Servicios</h2>
+        <div class="services-list-container">
+            <div class="service-card">
+                <span class="service-icon">✨</span>
+                <span class="service-name">Limpiezas Faciales</span>
+            </div>
+            <div class="service-card">
+                <span class="service-icon">💆‍♀️</span>
+                <span class="service-name">Masajes Reductores</span>
+            </div>
+            <div class="service-card">
+                <span class="service-icon">🌿</span>
+                <span class="service-name">Tratamiento de Acné</span>
+            </div>
+            <div class="service-card">
+                <span class="service-icon">🌸</span>
+                <span class="service-name">Rejuvenecimiento Facial</span>
+            </div>
+            <div class="service-card">
+                <span class="service-icon">🍑</span>
+                <span class="service-name">Tonificación de Glúteos</span>
             </div>
         </div>
     </section>
 
-    <!-- Modal Flotante de Descuento -->
-    <div id="descuentoModal" class="modal-overlay">
-        <div class="modal-container">
-            <button class="modal-close" id="closeModal" aria-label="Cerrar modal">×</button>
-            <div class="modal-content-wrapper">
-                <div class="modal-logo-section">
-                    <img src="330. En línea SPA/MARCA DE AGUA/MARCA DE AGUA_Mesa de trabajo 1.png" alt="En Línea Spa Logo" class="modal-logo-img">
-                </div>
-                <div class="registration-form-container">
-                    <div class="form-header">
-                        <div class="descuento-badge">20% OFF</div>
-                        <h2>¡Regístrate y gánate un descuento del 20%!</h2>
-                        <p>Completa el formulario y obtén un descuento del 20% en cualquiera de nuestros tratamientos</p>
+    <!-- Sección de Contacto -->
+    <section class="contact-section">
+        <div class="section-bubbles">
+            <div class="section-bubble sb-1"></div>
+            <div class="section-bubble sb-2"></div>
+            <div class="section-bubble sb-3"></div>
+            <div class="section-bubble sb-4"></div>
+            <div class="section-bubble sb-5"></div>
+            <div class="section-bubble sb-6"></div>
+        </div>
+        <h2 class="contact-title">Contáctanos</h2>
+        <div class="contact-content">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-text-wrapper">
+                        <span class="contact-label">Ubicación:</span>
+                        <span class="contact-value">San Pedro de los Milagros, Antioquia</span>
                     </div>
-                    <form id="registrationForm" class="registration-form">
-                        <div class="form-group">
-                            <label for="nombre">Nombre completo</label>
-                            <input type="text" id="nombre" name="nombre" required placeholder="Ingresa tu nombre">
-                        </div>
-                        <div class="form-group">
-                            <label for="correo">Correo electrónico</label>
-                            <input type="email" id="correo" name="correo" required placeholder="tu@correo.com">
-                        </div>
-                        <div class="form-group">
-                            <label for="celular">Celular</label>
-                            <input type="tel" id="celular" name="celular" required placeholder="300 123 4567">
-                        </div>
-                        <button type="submit" class="btn-submit">Registrarse y obtener descuento</button>
-                        <button type="button" class="btn-skip" id="skipForm">Quizás más tarde</button>
-                    </form>
-                    <div id="formMessage" class="form-message"></div>
                 </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <div class="contact-text-wrapper">
+                        <span class="contact-label">Teléfono:</span>
+                        <span class="contact-value">
+                            <a href="tel:+573103709731">(310) 370-97-31</a>
+                            <span class="separator">--</span>
+                            <a href="tel:+573116319294">(311) 631-92-94</a>
+                        </span>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">✉️</div>
+                    <div class="contact-text-wrapper">
+                        <span class="contact-label">Correo:</span>
+                        <a href="mailto:info@enlineaspa.com" class="contact-value">info@enlineaspa.com</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">🕐</div>
+                    <div class="contact-text-wrapper">
+                        <span class="contact-label">Horario:</span>
+                        <span class="contact-value">Lunes a Sábado 9:00 AM - 7:00 PM</span>
+                    </div>
+                </div>
+            </div>
+            <div class="mapa-container">
+                <iframe 
+                    src="https://www.google.com/maps?q=6.461133,-75.555624&hl=es&z=15&output=embed"
+                    width="100%" 
+                    height="350" 
+                    style="border:0; border-radius: 15px;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+                <p class="mapa-coordenadas">📍 Coordenadas: 6°27'40.1"N 75°33'20.3"W</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Header flotante -->
+    <header class="floating-header">
+        <div class="header-content">
+            <img src="330. En línea SPA/JPG Y PNG/PNG_Mesa de trabajo 1 copia 3.png" alt="En Línea Spa" class="logo-header-left">
+            <img src="330. En línea SPA/JPG Y PNG/PNG_Mesa de trabajo 1 copia 6.png" alt="En Línea Spa" class="logo-header-right">
+            <a href="https://wa.me/573116319294?text=Hola,%20me%20gustaría%20solicitar%20información%20sobre%20sus%20servicios" 
+               class="header-whatsapp" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               aria-label="Contactar por WhatsApp">
+                <svg class="whatsapp-icon-small" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                </svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Modal de Descuento -->
+    <div id="modalDescuento" class="modal-overlay">
+        <div class="modal-container">
+            <button class="modal-close" onclick="cerrarModalDescuento()" aria-label="Cerrar modal">×</button>
+            <div class="modal-logo-section">
+                <img src="330. En línea SPA/JPG Y PNG/PNG_Mesa de trabajo 1 copia 6.png" alt="En Línea Spa" class="modal-logo">
+            </div>
+            <div class="modal-content">
+                <h2>Regístrate y recibe</h2>
+                <span class="discount-amount-modal">10% de descuento</span>
+                <p>En cualquiera de nuestros tratamientos</p>
+                <form id="registrationForm" class="registration-form">
+                    <div class="form-group">
+                        <input type="text" id="nombre" name="nombre" required placeholder="Nombre completo">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="correo" name="correo" required placeholder="Correo electrónico">
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="celular" name="celular" required placeholder="Celular">
+                    </div>
+                    <button type="submit" class="btn btn-promo-submit">Obtener descuento</button>
+                </form>
+                <div id="formMessage" class="form-message"></div>
             </div>
         </div>
     </div>
 
-    <!-- Sección Tratamientos Faciales -->
-    <section id="tratamientos-faciales" class="tratamientos-section">
-        <div class="container">
-            <h2 class="section-title">Tratamientos Faciales</h2>
-            
-            <!-- Video Facial pagina1 -->
-            <div class="media-item">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/1.jpg">
-                        <source src="img/videosenlinea/faciales/pagina1.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Peeling Químico</h3>
-                    <p class="media-leyenda">¡Si crees que el peeling químico es solo para aclarar manchas, estás equivocada! Este tratamiento va mucho más allá y puede transformar tu piel de varias maneras. Beneficios que nadie te cuenta: Estimula la producción de colágeno, dejando la piel más firme y rejuvenecida. Reduce las cicatrices de acné y mejora la textura de la piel. Controla el exceso de grasa, ayudando a reducir los puntos negros y espinillas. Potencia la hidratación y el resplandor natural de la piel. ¡Pero atención! Para obtener resultados seguros y efectivos, es esencial que el procedimiento lo realice un profesional capacitado y con los cuidados adecuados post- tratamiento. ¿Quieres saber si el peeling químico es adecuado para ti? ¡Envíame un mensaje directo y agenda una evaluación! ¡Tu piel merece este cuidado!</p>
-                </div>
+    <!-- Modal de Agenda -->
+    <div id="modalAgenda" class="modal-overlay">
+        <div class="modal-container modal-agenda">
+            <button class="modal-close" onclick="cerrarModalAgenda()" aria-label="Cerrar modal">×</button>
+            <div class="modal-logo-section">
+                <img src="330. En línea SPA/JPG Y PNG/PNG_Mesa de trabajo 1 copia 6.png" alt="En Línea Spa" class="modal-logo">
             </div>
-
-            <!-- Video Facial pagina2 -->
-            <div class="media-item reverse">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/2.jpg">
-                        <source src="img/videosenlinea/faciales/pagina2.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Peeling Químico Personalizado</h3>
-                    <p class="media-leyenda">Si piensas que el peeling químico solo sirve para descamar la piel, déjame contarte lo que realmente puede hacer por ti. ¡El tratamiento puede ser personalizado según tus necesidades, asegurando un resultado seguro y efectivo! ¿Quieres saber qué peeling químico es ideal para tu piel? ¡Envíame un mensaje directo y agenda tu evaluación!</p>
-                </div>
-            </div>
-
-            <!-- Video Facial pagina3 -->
-            <div class="media-item">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/3.jpg">
-                        <source src="img/videosenlinea/faciales/pagina3.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Puntos Negros y Cuidados de la Piel</h3>
-                    <p class="media-leyenda">Si sientes que tu piel está áspera, sin resplandor y tus productos no están dando resultados, ¡puede que los puntos negros estén bloqueando la absorción de los activos! ¿Por qué sucede esto? Los puntos negros son acumulaciones de grasa, células muertas y residuos en los poros. Cuando la piel no está correctamente limpia y renovada, los productos no pueden penetrar y actuar como deberían. ¿La solución? Elimina las impurezas con una limpieza profunda de la piel. Controla la oleosidad y previene nuevos puntos negros. Mejora la textura de la piel, dejándola suave y saludable. Aumenta la absorción de tus productos, potenciando los resultados. ¿Quieres dejar tu piel limpia, renovada y con resplandor? Envíame un mensaje directo para saber cuál es el mejor tratamiento para ti! ¡Agenda tu sesión y nota la diferencia en tu piel!</p>
-                </div>
-            </div>
-
-            <!-- Video Facial pagina4 -->
-            <div class="media-item reverse">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/4.jpg">
-                        <source src="img/videosenlinea/faciales/pagina4.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Limpieza Profunda</h3>
-                    <p class="media-leyenda">Si tus productos no están dando los resultados esperados, tal vez el problema no sea el producto… ¡sino la necesidad de una limpieza profunda! Con la acumulación de impurezas, células muertas y grasa, los activos de los cosméticos no pueden penetrar en la piel como deberían, afectando la hidratación, luminosidad y uniformidad. ¿Por qué la limpieza facial marca la diferencia? Desobstruye los poros, previniendo puntos negros y espinillas. Elimina impurezas y células muertas, dejando la piel más suave. Mejora la absorción de tus productos, potenciando los resultados. Deja la piel iluminada y saludable, con un resplandor natural increíble. Si tu piel necesita un reset para volver a brillar, ¡envíame un mensaje directo y agenda tu sesión! ¡Dale a tu piel el cuidado que se merece!</p>
-                </div>
-            </div>
-
-            <!-- Video Facial pagina5 -->
-            <div class="media-item">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/5.jpg">
-                        <source src="img/videosenlinea/faciales/pagina5.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Estimulación de Colágeno sin Agujas</h3>
-                    <p class="media-leyenda">Si crees que solo existe una manera de mantener la piel firme y joven, déjame contarte un secreto… ¡Es posible estimular el colágeno y prevenir el envejecimiento sin necesidad de agujas! ¿Cómo funciona esto? Existen tratamientos que activan la producción natural de colágeno, mejoran la elasticidad de la piel y previenen arrugas y flacidez, ¡todo de forma segura y no invasiva! Beneficios que te van a encantar: Piel más firme y rejuvenecida. Estímulo natural de colágeno. Reducción de líneas finas y prevención de arrugas. ¡Sin dolor y sin tiempo de recuperación! Si quieres cuidar tu piel de la manera correcta, envíame un mensaje directo y descubre el mejor tratamiento para ti. ¡Agenda tu sesión y comienza la transformación ahora!</p>
-                </div>
-            </div>
-
-            <!-- Video Facial pagina6 -->
-            <div class="media-item reverse">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/6.jpg">
-                        <source src="img/videosenlinea/faciales/pagina6.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Tratamiento Rejuvenecedor</h3>
-                    <p class="media-leyenda">Si buscas un tratamiento para rejuvenecer y firmar la piel, ¡debes conocer este procedimiento! Actúa de adentro hacia afuera, activando el colágeno natural y trayendo resultados increíbles. Beneficios que te encantarán: Estimula el colágeno, dejando la piel más firme y joven. Reduce las arrugas finas y previene los signos de envejecimiento. Mejora la textura de la piel, dejándola más uniforme y suave. Efecto lifting inmediato, proporcionando un aspecto más rejuvenecido. ¿Lo mejor? ¡El procedimiento es seguro, indoloro y no invasivo! ¿Quieres saber si es para ti? Envíame un mensaje directo. ¡Agenda tu evaluación y mejora tu piel ahora!</p>
-                </div>
-            </div>
-
-            <!-- Video Facial pagina16 -->
-            <div class="media-item">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/7.jpg">
-                        <source src="img/videosenlinea/faciales/pagina16.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Masaje Facial</h3>
-                    <p class="media-leyenda">¡La respuesta es Sí! El masaje facial es uno de los tratamientos naturales más poderosos para prevenir líneas finas y mejorar la apariencia de la piel. Al estimular la circulación sanguínea, esta técnica ayuda a oxigenar la piel, promoviendo un aspecto más luminoso y saludable. Además, el masaje facial puede: Relajar los músculos faciales, previniendo la formación de arrugas de expresión. Aumentar la firmeza de la piel, al activar la producción de colágeno. Reducir la hinchazón y mejorar el drenaje, dejando el rostro más tonificado y descansado. ¿Quieres empezar a incorporar esta práctica en tu cuidado diario y mantener tu rostro joven por más tiempo? ¡Agenda una evaluación y te enseño cómo!</p>
-                </div>
-            </div>
-
-            <!-- Video Facial pagina17 -->
-            <div class="media-item reverse">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/8.jpg">
-                        <source src="img/videosenlinea/faciales/pagina17.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Peeling de Diamante</h3>
-                    <p class="media-leyenda">El peeling de diamante es uno de los tratamientos más populares en estética porque ofrece una renovación suave y eficaz, ¡sin ese proceso de descamación intensa! Es ideal para quienes buscan una piel más luminosa, suave y con una textura mejorada, ¡sin tiempo de inactividad! Beneficios del Peeling de Diamante: Renovación celular de forma suave. Mejora la textura de la piel. Reduce manchas y acné. Piel más radiante y uniforme. ¿Ya has probado el peeling de diamante? ¡Comenta abajo qué opinas de este tratamiento! Agenda tu evaluación y ven a descubrir los beneficios de este increíble tratamiento para tu piel. ¡Mándame un mensaje directo!</p>
-                </div>
-            </div>
-
-            <!-- Video Facial pagina28 -->
-            <div class="media-item">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/9.jpg">
-                        <source src="img/videosenlinea/faciales/pagina28.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Microagujado</h3>
-                    <p class="media-leyenda">El microagujado es una técnica increíble que estimula la renovación celular, ayuda a suavizar las líneas finas y arrugas, mejora la textura de la piel y reduce manchas. ¡Todo esto para dejarte con una piel más joven, firme y radiante! ¿Por qué te va a encantar? Estímulo a la producción de colágeno. Mejora en la textura y firmeza de la piel. Reducción de manchas, cicatrices y poros dilatados. ¡Agenda tu sesión y comienza la transformación! Mándame un mensaje directo para más detalles.</p>
-                </div>
-            </div>
-
-            <!-- Video Facial pagina29 -->
-            <div class="media-item reverse">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/10.jpg">
-                        <source src="img/videosenlinea/faciales/pagina29.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Rutina de Cuidados de la Piel</h3>
-                    <p class="media-leyenda">La rutina de cuidados de la piel es esencial para mantener tu piel saludable y radiante de vitalidad. Sin los cuidados adecuados, la piel puede verse apagada, seca y fatigada, ¡incluso si has tenido una buena noche de sueño! Los beneficios de invertir en tu skincare: Piel más hidratada y luminosa. Reducción de signos de cansancio. Prevención del envejecimiento prematuro. ¡Cuéntame en los comentarios cuáles son los principales cuidados que tienes con tu piel! ¿Quieres aprender a crear la rutina ideal para tu piel? ¡Envíame un mensaje directo y te ayudaré!</p>
-                </div>
-            </div>
-
-            <!-- Video Facial pagina30 -->
-            <div class="media-item">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/11.jpg">
-                        <source src="img/videosenlinea/faciales/pagina30.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Rutina de Cuidados de la Piel</h3>
-                    <p class="media-leyenda">La rutina de cuidados de la piel es esencial para mantener tu piel saludable y radiante de vitalidad. Sin los cuidados adecuados, la piel puede verse apagada, seca y fatigada, ¡incluso si has tenido una buena noche de sueño! Los beneficios de invertir en tu skincare: Piel más hidratada y luminosa. Reducción de signos de cansancio. Prevención del envejecimiento prematuro. ¡Cuéntame en los comentarios cuáles son los principales cuidados que tienes con tu piel! ¿Quieres aprender a crear la rutina ideal para tu piel? ¡Envíame un mensaje directo y te ayudaré!</p>
-                </div>
-            </div>
-
-            <!-- Video Facial pagina31 -->
-            <div class="media-item reverse">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/12.jpg">
-                        <source src="img/videosenlinea/faciales/pagina31.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Tratamiento de Líneas Finas</h3>
-                    <p class="media-leyenda">¡La mejor hora para comenzar a tratar los signos de la edad es ahora! Cuanto antes empieces a cuidar tu piel, más suaves y disimuladas pueden volverse esas líneas. No esperes que pase el tiempo, ¡invierte en tratamientos que estimulen la producción de colágeno y mantengan tu piel siempre joven! Beneficios de tratar las líneas finas a tiempo: Suaviza las marcas de expresión. Previene el agravamiento de las arrugas. Mantiene la piel firme y rejuvenecida. ¿Vamos a hablar sobre el tratamiento ideal para ti? ¡Agenda tu evaluación!</p>
-                </div>
-            </div>
-
-            <!-- Video Facial pagina32 -->
-            <div class="media-item">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/13.jpg">
-                        <source src="img/videosenlinea/faciales/pagina32.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Control de Puntos Negros</h3>
-                    <p class="media-leyenda">¿Ya te has hecho una limpieza facial, pero los puntos negros siempre vuelven? ¡El secreto para mantener tu piel libre de puntos negros por más tiempo va más allá de la limpieza! Para garantizar una piel limpia y sin imperfecciones, es necesario adoptar tratamientos continuos y una rutina de cuidados que ayude a controlar la oleosidad y la obstrucción de los poros. Consejos para mantener la piel limpia y saludable: Tratamientos que regulan la oleosidad. Uso de productos que previenen la acumulación de células muertas. Hidratación y exfoliación adecuadas para tu tipo de piel. ¿Quieres saber más sobre cómo cuidar tu piel de manera eficaz? ¡Agenda tu evaluación!</p>
-                </div>
-            </div>
-
-            <!-- Video Facial pagina41 -->
-            <div class="media-item reverse">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/14.jpg">
-                        <source src="img/videosenlinea/faciales/pagina41.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Tratamiento del Acné</h3>
-                    <p class="media-leyenda">Muchas veces, el acné no está solo relacionado con lo que aplicas en la piel, sino también con factores internos como la alimentación, el estrés, el desequilibrio hormonal e incluso los productos que estás usando. Aquí algunas posibles causas que quizás no habías considerado: Cambios hormonales: Puede ser un factor importante, especialmente en momentos como la pubertad, embarazo o ciclos menstruales. Alimentación desequilibrada: Alimentos con alto índice glucémico pueden agravar el acné. Productos inadecuados: Algunos productos pueden obstruir los poros, incluso si se usan a diario. Estrés y falta de sueño: El estrés puede desencadenar el acné, y la falta de sueño también afecta la salud de la piel. ¡Los cuidados desde adentro son tan importantes como el skincare diario! Cuida tu alimentación, estrés y sueño para obtener resultados más efectivos. ¿Sufres de acné persistente? ¡Hablemos y encontremos la solución ideal para tu piel! Mándame un mensaje directo.</p>
-                </div>
-            </div>
-
-            <!-- Video Facial pagina45 -->
-            <div class="media-item">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/15.jpg">
-                        <source src="img/videosenlinea/faciales/pagina45.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Tratamiento del Melasma</h3>
-                    <p class="media-leyenda">¡Sé lo frustrante que es lidiar con esto! Pero, ¿sabías que algunos hábitos diarios pueden estar agravando aún más tu melasma? Aquí algunos errores comunes que pueden empeorar las manchas: Exposición solar sin protección: El sol es uno de los principales villanos del melasma, y la protección solar debe ser tu mayor aliada, ¡todos los días, incluso en días nublados! Productos con ingredientes irritantes: Algunos activos como el ácido glicólico o ciertos aceites esenciales pueden sensibilizar la piel, aumentando la pigmentación. No hidratar adecuadamente: La deshidratación puede hacer que la piel sea más vulnerable e incluso estimular el aumento de la pigmentación. Exposición a cambios bruscos de temperatura: Alteraciones rápidas en el clima pueden agravar las manchas ya existentes. Falta de seguimiento profesional: Tratar el melasma con productos aleatorios puede ser un error grave. El acompañamiento de un especialista es fundamental para un tratamiento eficaz. ¿Quieres saber cómo tratar tu melasma de manera segura y eficaz? ¡Mándame un mensaje directo y agenda tu evaluación!</p>
-                </div>
-            </div>
-
-            <!-- Video Facial pagina49 -->
-            <div class="media-item reverse">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/16.jpg">
-                        <source src="img/videosenlinea/faciales/pagina49.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Preservar la Juventud de la Piel</h3>
-                    <p class="media-leyenda">¡La buena noticia es que puedes preservar la juventud de tu piel por mucho más tiempo con algunos cuidados simples y efectivos! Aquí tienes los secretos para mantener tu piel más joven por más tiempo: Hidratación constante Protección solar diaria Estimulación de colágeno Alimentación balanceada Cuidados nocturnos Evitar el estrés y cuidar la mente ¡Envejecer con salud y belleza es una elección! ¡Agenda tu evaluación y descubre qué funciona mejor para mantener tu piel joven y radiante por más tiempo!</p>
-                </div>
-            </div>
-
-            <!-- Video Facial pagina50 -->
-            <div class="media-item">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/17.jpg">
-                        <source src="img/videosenlinea/faciales/pagina50.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Estimulación de Colágeno</h3>
-                    <p class="media-leyenda">¡La respuesta es sí! El colágeno es una proteína esencial para la firmeza y elasticidad de nuestra piel. Con el paso de los años, la producción natural de colágeno disminuye, lo que puede llevar a signos como flacidez y arrugas. Pero la buena noticia es que es posible estimular la producción de colágeno a través de tratamientos estéticos y cuidados diarios. Procedimientos como radiofrecuencia, microaguja y bioestimuladores son excelentes opciones para incentivar la acción del colágeno y asegurar una piel más joven y firme. ¿Quieres saber más sobre cómo hacer que tu piel luzca más joven y saludable? ¡Agenda una evaluación y descubre los tratamientos ideales para tu caso!</p>
-                </div>
-            </div>
-
-            <!-- Video Facial pagina52 -->
-            <div class="media-item reverse">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/18.jpg">
-                        <source src="img/videosenlinea/faciales/pagina52.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Estimulación de Colágeno Avanzada</h3>
-                    <p class="media-leyenda">El colágeno es esencial para mantener la firmeza, elasticidad y juventud de la piel. Sin embargo, a medida que envejecemos, nuestra producción natural de colágeno disminuye, lo que puede resultar en flacidez, arrugas y pérdida de vitalidad. Pero aquí está el secreto: ¡no necesitamos esperar a que la producción de colágeno disminuya por completo para actuar! La estimulación externa de colágeno, mediante tratamientos como radiofrecuencia, bioestimuladores e incluso cremas con activos potentes, puede potenciar lo que tu cuerpo ya hace y mantener la piel firme por más tiempo. El secreto no está en esperar a que el colágeno se acabe, ¡sino en estimular su producción de forma inteligente y eficaz! ¿Quieres saber cómo? ¡Envíame un mensaje directo y agenda tu evaluación! ¡Cuidemos tu colágeno ahora para asegurar una piel joven por más tiempo!</p>
-                </div>
-            </div>
-
-            <!-- Video Facial pagina53 -->
-            <div class="media-item">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/19.jpg">
-                        <source src="img/videosenlinea/faciales/pagina53.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Masaje Facial</h3>
-                    <p class="media-leyenda">¡La respuesta es SÍ! El masaje facial es uno de los tratamientos naturales más poderosos para prevenir líneas finas y mejorar la apariencia de la piel. Al estimular la circulación sanguínea, esta técnica ayuda a oxigenar la piel, promoviendo un aspecto más luminoso y saludable. Además, el masaje facial puede: Relajar los músculos faciales, previniendo la formación de arrugas de expresión. Aumentar la firmeza de la piel, al activar la producción de colágeno. Reducir la hinchazón y mejorar el drenaje, dejando el rostro más tonificado y descansado. ¿Quieres empezar a incorporar esta práctica en tu cuidado diario y mantener tu rostro joven por más tiempo? ¡Agenda una evaluación y te enseño cómo!</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sección Tratamientos Corporales -->
-    <section id="tratamientos-corporales" class="tratamientos-section">
-        <div class="container">
-            <h2 class="section-title">Tratamientos Corporales</h2>
-            
-            <!-- Video Corporal pagina1 -->
-            <div class="media-item">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/14.jpg">
-                        <source src="img/videosenlinea/corporales/pagina1.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Reducción de Medidas</h3>
-                    <p class="media-leyenda">La verdad es que esta técnica SÍ puede ayudar a reducir medidas, mejorar la circulación y modelar el cuerpo, pero debe hacerse de la manera correcta. Con movimientos intensos y específicos, estimula el metabolismo local y ayuda a eliminar toxinas. ¡Pero atención! Sin constancia y buenos hábitos, los resultados pueden ser limitados. ¿Quieres entender mejor cómo funciona y ver resultados reales? ¡Envíanos un mensaje y agenda tu cita!</p>
-                </div>
-            </div>
-
-            <!-- Video Corporal pagina2 -->
-            <div class="media-item reverse">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/15.jpg">
-                        <source src="img/videosenlinea/corporales/pagina2.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Alivio de Molestias y Pesadez</h3>
-                    <p class="media-leyenda">Si sientes esa molestia en las piernas, hinchazón en el cuerpo y una sensación de pesadez a lo largo del día, debes saber que esto puede ser causado por la acumulación de líquidos y la mala circulación. ¡Pero la buena noticia es que hay solución! Con la técnica adecuada, te ayudo a aliviar estos síntomas y a brindarte una sensación de ligereza inmediata. Imagina sentir tus piernas desinflamadas, tu cuerpo más liviano y tu bienestar renovado… ¡Eso es lo que mi masaje puede ofrecerte! ¡No esperes más! Agenda tu cita ahora y siente la diferencia desde la primera sesión.</p>
-                </div>
-            </div>
-
-            <!-- Video Corporal pagina3 -->
-            <div class="media-item">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/16.jpg">
-                        <source src="img/videosenlinea/corporales/pagina3.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Drenaje Linfático</h3>
-                    <p class="media-leyenda">¿Sabías que el drenaje linfático va mucho más allá de la estética? ¡Esta increíble técnica ayuda a reducir la hinchazón de forma natural, mejora la celulitis, activa la circulación y aún te brinda una sensación de ligereza inmediata! Si sufres de retención de líquidos, piernas pesadas o quieres mejorar la apariencia de tu piel, ¡esta es la elección perfecta! ¡Agenda tu sesión y siente la diferencia en tu cuerpo y bienestar! ¡Tu cuerpo merece este cuidado!</p>
-                </div>
-            </div>
-
-            <!-- Video Corporal pagina4 -->
-            <div class="media-item reverse">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/17.jpg">
-                        <source src="img/videosenlinea/corporales/pagina4.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Drenaje Linfático Completo</h3>
-                    <p class="media-leyenda">El drenaje linfático no es solo un masaje, ¡es un tratamiento completo! Si crees que el drenaje es solo un momento de relajación, debes saber que sus beneficios van mucho más allá. Mejora el flujo sanguíneo, reduciendo la sensación de pesadez en las piernas. Estimula la eliminación de líquidos retenidos, brindando ligereza. Reduce el aspecto de "piel de naranja" al desinflamar y oxigenar la piel. Ayuda al cuerpo a eliminar impurezas, haciéndote sentir más saludable. ¡Sales de la sesión renovada, más liviana y relajada! ¡Tu cuerpo merece este cuidado! Agenda tu sesión y siente la diferencia desde la primera sesión.</p>
-                </div>
-            </div>
-
-            <!-- Video Corporal pagina5 -->
-            <div class="media-item">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/18.jpg">
-                        <source src="img/videosenlinea/corporales/pagina5.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Lipoenzimática</h3>
-                    <p class="media-leyenda">¿Quieres reducir medidas sin cirugía? La lipoenzimática es un procedimiento seguro y mínimamente invasivo que actúa directamente en las células de grasa, ayudando a tu cuerpo a eliminarlas de forma natural. ¿Cómo funciona? Las enzimas aplicadas descomponen las células de grasa, que luego son eliminadas por el organismo. ¿El resultado? ¡Menos volumen y un contorno más definido! ¡Cuanto antes comiences, más rápido verás la diferencia! Envíame un mensaje para agendar tu evaluación y dar el primer paso hacia la transformación.</p>
-                </div>
-            </div>
-
-            <!-- Video Corporal pagina6 -->
-            <div class="media-item reverse">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/19.jpg">
-                        <source src="img/videosenlinea/corporales/pagina6.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Reducción de Grasa Localizada</h3>
-                    <p class="media-leyenda">¡Adiós, grasa localizada! Y lo mejor: ¡sin cirugía! Si quieres reducir medidas y definir tu cuerpo de forma segura y efectiva, ¡tenemos los tratamientos ideales para ti! Reducción de grasa localizada. Procedimientos seguros y mínimamente invasivos. Resultados visibles en pocas sesiones. ¡Ven a conocer nuestras técnicas y elige la mejor para ti! Agenda una evaluación y descubre cómo lograr el cuerpo que deseas.</p>
-                </div>
-            </div>
-
-            <!-- Video Corporal pagina7 -->
-            <div class="media-item">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/20.jpg">
-                        <source src="img/videosenlinea/corporales/pagina7.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Lipoenzimática Avanzada</h3>
-                    <p class="media-leyenda">La lipoenzimática es uno de los procedimientos más deseados para quienes quieren reducir medidas de forma rápida y efectiva, ¡sin necesidad de cirugía! Descompone las células de grasa. Reduce medidas de forma segura. Resultados visibles a partir de la 3ª sesión. ¡Agenda tu evaluación y da el primer paso para transformar tu cuerpo!</p>
-                </div>
-            </div>
-
-            <!-- Video Corporal pagina8 -->
-            <div class="media-item reverse">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/21.jpg">
-                        <source src="img/videosenlinea/corporales/pagina8.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Criolipólisis</h3>
-                    <p class="media-leyenda">La criolipólisis es un procedimiento increíble que congela las células de grasa, haciendo que el cuerpo las elimine de forma NATURAL y segura. Reduce medidas con precisión. ¡Sin cirugía, sin cortes! Resultados visibles después de algunas semanas. ¿Lo mejor de todo? ¡La grasa eliminada no vuelve! Agenda tu evaluación y descubre cómo lograr el cuerpo de tus sueños.</p>
-                </div>
-            </div>
-
-            <!-- Video Corporal pagina9 -->
-            <div class="media-item">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/22.jpg">
-                        <source src="img/videosenlinea/corporales/pagina9.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Criolipólisis: El Frío que Destruye la Grasa</h3>
-                    <p class="media-leyenda">Criolipólisis: ¡el frío que destruye la grasa! La criolipólisis es un tratamiento innovador que utiliza el frío para destruir las células de grasa, permitiendo que el cuerpo las elimine de forma natural. ¡Sin cirugía, sin dolor! Reducción de medidas de manera eficaz y segura. Resultados duraderos y visibles en pocas semanas. ¿Quieres lograr un cuerpo más definido y libre de grasa localizada? ¡Agenda tu evaluación ahora!</p>
-                </div>
-            </div>
-
-            <!-- Video Corporal pagina10 -->
-            <div class="media-item reverse">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/23.jpg">
-                        <source src="img/videosenlinea/corporales/pagina10.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Tratamientos Corporales Integrales</h3>
-                    <p class="media-leyenda">¡Tenemos los mejores tratamientos para que consigas el cuerpo de tus sueños de manera segura y eficaz, sin necesidad de intervenciones invasivas! Reduce medidas rápidamente. Elimina la grasa localizada. Siéntete más ligera y renovada. Resultados duraderos y naturales. Agenda tu evaluación ahora y descubre cuál tratamiento es ideal para ti.</p>
-                </div>
-            </div>
-
-            <!-- Video Corporal pagina11 -->
-            <div class="media-item">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/24.jpg">
-                        <source src="img/videosenlinea/corporales/pagina11.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Tratamientos No Invasivos</h3>
-                    <p class="media-leyenda">¡Basta de pasar por procedimientos invasivos o recurrir a métodos que no traen los resultados deseados! Con nuestros tratamientos seguros y efectivos, lograrás el cuerpo de tus sueños sin necesidad de cirugía. Imagina reducir la grasa localizada, modelar tu cuerpo y mejorar la textura de tu piel de forma natural, sin dolor y sin necesidad de cortes. ¡Lo mejor de todo es que los resultados son visibles en pocas sesiones y duraderos, dejándote aún más confiada y renovada! Agenda tu evaluación y ven a descubrir qué tratamiento es ideal para ti. ¡Tu cuerpo merece este cuidado!</p>
-                </div>
-            </div>
-
-            <!-- Video Corporal pagina12 -->
-            <div class="media-item reverse">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/25.jpg">
-                        <source src="img/videosenlinea/corporales/pagina12.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Tratamiento de Celulitis y Flacidez</h3>
-                    <p class="media-leyenda">¡Estos son problemas que muchas enfrentan, pero la buena noticia es que hay solución! Con los tratamientos adecuados, es posible mejorar la apariencia de la piel, reducir la celulitis y combatir la flacidez, dejando tu cuerpo más firme y tonificado. Resultados visibles en pocas sesiones. Sin dolor, sin cirugía. Piel más suave y firme. Agenda tu evaluación y descubre cómo podemos transformar tu cuerpo de forma natural y efectiva.</p>
-                </div>
-            </div>
-
-            <!-- Video Corporal pagina17 -->
-            <div class="media-item">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/26.jpg">
-                        <source src="img/videosenlinea/corporales/pagina17.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Tratamientos para Reducir Grasa Localizada</h3>
-                    <p class="media-leyenda">¿Sabías que existen tratamientos increíbles y efectivos para reducir la grasa localizada y lograr un cuerpo más definido? Aquí están los más utilizados y que ofrecen resultados visibles y duraderos: Lipoenzimática – Reduce la grasa localizada y define el contorno del cuerpo con la aplicación de enzimas que descomponen las células de grasa. Criolipólisis – El frío que elimina la grasa localizada congelando las células de grasa, que luego son eliminadas de forma natural por el cuerpo. Drenaje Linfático – Mejora la circulación, combate la retención de líquidos y proporciona una sensación de ligereza, ayudando a reducir la hinchazón y la celulitis. Carboxiterapia – Estimula la circulación y la producción de colágeno, combatiendo la celulitis y la flacidez al mismo tiempo. ¡Estos tratamientos se pueden hacer de forma mínimamente invasiva, sin necesidad de cirugía, y con resultados increíbles! Agenda tu evaluación y descubre cuál tratamiento es ideal para ti.</p>
-                </div>
-            </div>
-
-            <!-- Video Corporal pagina18 -->
-            <div class="media-item reverse">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/27.jpg">
-                        <source src="img/videosenlinea/corporales/pagina18.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Radiofrecuencia Corporal</h3>
-                    <p class="media-leyenda">La radiofrecuencia es uno de los mejores tratamientos para quienes desean estimular la producción de colágeno y lograr una piel más firme, joven y tonificada. Con la radiofrecuencia, activas las capas más profundas de la piel, promoviendo un efecto lifting natural que mejora la textura y elasticidad de tu piel, combatiendo la flacidez de manera eficaz y sin cirugía. Aumento de la firmeza de la piel. Reducción de la flacidez. Piel más joven y rejuvenecida. Tratamiento rápido y sin dolor. Agenda tu evaluación y ven a descubrir cómo la radiofrecuencia puede transformar tu piel.</p>
-                </div>
-            </div>
-
-            <!-- Video Corporal pagina19 -->
-            <div class="media-item">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/28.jpg">
-                        <source src="img/videosenlinea/corporales/pagina19.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Radiofrecuencia para Firmeza</h3>
-                    <p class="media-leyenda">Si buscas una piel más firme y rejuvenecida, ¡la radiofrecuencia es la solución ideal! Este tratamiento utiliza tecnología avanzada para estimular la producción de colágeno, dejando tu piel más tonificada y joven. Estimula la producción de colágeno. Mejora la firmeza y elasticidad de la piel. Reduce la flacidez y combate el envejecimiento prematuro. ¡Sin dolor, sin cirugía! Agenda tu evaluación y descubre cómo la radiofrecuencia puede transformar tu piel.</p>
-                </div>
-            </div>
-
-            <!-- Video Corporal pagina26 -->
-            <div class="media-item reverse">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/29.jpg">
-                        <source src="img/videosenlinea/corporales/pagina26.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">PumpUP para Glúteos</h3>
-                    <p class="media-leyenda">PumpUP: ¡el secreto para glúteos más firmes y modelados! ¿Quieres levantar y modelar tus glúteos de manera eficaz? ¡PumpUP es la solución! Este tratamiento no solo aumenta la firmeza, sino que también mejora la circulación, trayendo resultados visibles desde las primeras sesiones. Glúteos más modelados y definidos. Aumento de la firmeza y tonificación. Mejora de la circulación y el aspecto de la piel. ¿Ya has probado PumpUP? ¡Cuéntame en los comentarios si tienes curiosidad por ver los resultados! Agenda tu evaluación y ven a sentir los resultados en tu piel.</p>
-                </div>
-            </div>
-
-            <!-- Video Corporal pagina27 -->
-            <div class="media-item">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/30.jpg">
-                        <source src="img/videosenlinea/corporales/pagina27.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">PumpUp para Glúteos Firmes</h3>
-                    <p class="media-leyenda">¿Qué tal lograr glúteos más firmes y levantados de manera rápida y eficaz? Con PumpUp, ¡alcanzarás resultados visibles y sentirás la diferencia desde las primeras sesiones! Levanta y modela los glúteos. Aumenta la firmeza y tonificación. Mejora la circulación y el aspecto de la piel. ¿Estás lista para darle ese empuje a tus glúteos? ¡Cuéntame en los comentarios qué es lo que más te gustaría mejorar de tu cuerpo! Agenda tu evaluación y ven a transformar tu cuerpo con PumpUp.</p>
-                </div>
-            </div>
-
-            <!-- Video Corporal pagina28 -->
-            <div class="media-item reverse">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/31.jpg">
-                        <source src="img/videosenlinea/corporales/pagina28.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">PumpUp para Bumbum Definido</h3>
-                    <p class="media-leyenda">¡Bumbum definido con PumpUp! ¿Quién no sueña con un bumbum tonificado y definido, verdad? PumpUp es el tratamiento perfecto para quienes desean estimular los músculos y mejorar la circulación, dejando su bumbum más levantado y firme. Bumbum más tonificado y definido. Estimula los músculos y mejora la circulación. Resultados visibles desde las primeras sesiones. ¿Y tú, ya has pensado en invertir en este tratamiento para lograr el bumbum de tus sueños? ¡Cuéntame en los comentarios! Agenda tu evaluación y ven a transformar tu bumbum con PumpUp.</p>
-                </div>
-            </div>
-
-            <!-- Video Corporal pagina29 -->
-            <div class="media-item">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/32.jpg">
-                        <source src="img/videosenlinea/corporales/pagina29.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Drenaje Linfático Terapéutico</h3>
-                    <p class="media-leyenda">¿Sabías que la drenaje linfático puede ser la solución para muchos malestares del cuerpo? Aquí te dejamos algunas señales de que tu cuerpo está pidiendo este tratamiento esencial. Si te identificas con alguno de estos síntomas, la drenaje linfático puede ser la clave para mejorar tu calidad de vida y aliviar estos malestares. ¿Has sentido alguno de estos síntomas? ¡Cuéntame en los comentarios! Agenda tu sesión y ven a sentir la ligereza que solo el drenaje linfático puede proporcionar.</p>
-                </div>
-            </div>
-
-            <!-- Video Corporal pagina30 -->
-            <div class="media-item reverse">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/33.jpg">
-                        <source src="img/videosenlinea/corporales/pagina30.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Masoterapia Modeladora</h3>
-                    <p class="media-leyenda">¿Quieres lograr un cuerpo más definido y tonificado? ¡La masoterapia modeladora es el tratamiento perfecto para quienes desean reducir medidas, mejorar el contorno corporal y hacer que las curvas sean aún más marcadas! Redefine las curvas y contornos del cuerpo. Resultados visibles en pocas sesiones. Estimula la circulación y mejora la firmeza de la piel. ¿Quién ya ha probado la masoterapia modeladora? ¡Cuéntanos en los comentarios qué más te motiva a comenzar el tratamiento! Agenda tu sesión y ven a experimentar esta transformación.</p>
-                </div>
-            </div>
-
-            <!-- Video Corporal pagina31 -->
-            <div class="media-item">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/34.jpg">
-                        <source src="img/videosenlinea/corporales/pagina31.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Drenaje Linfático para Salud</h3>
-                    <p class="media-leyenda">¡Va más allá de la apariencia! – El drenaje linfático mejora tu salud y bienestar de una manera increíble. Mejora la circulación sanguínea. Alivia la retención de líquidos. Reduce la hinchazón y los edemas. Ayuda a combatir el estrés y la tensión. Aumenta la sensación de ligereza y disposición. ¿Quién más ha notado los beneficios del drenaje linfático? ¡Cuéntanos en los comentarios! Vamos a agendar tu sesión y cuidar de tu salud y bienestar.</p>
-                </div>
-            </div>
-
-            <!-- Video Corporal pagina32 -->
-            <div class="media-item reverse">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/35.jpg">
-                        <source src="img/videosenlinea/corporales/pagina32.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Glúteos Firmes sin Gimnasio</h3>
-                    <p class="media-leyenda">¡Sí, lo leíste bien! Es posible conquistar glúteos firmes y levantados sin tener que pasar horas en el gimnasio. Con los tratamientos adecuados, puedes alcanzar el trasero de tus sueños de forma rápida y eficaz, sin necesidad de pesas o ejercicios intensos. Glúteos firmes y tonificados. Resultados visibles desde las primeras sesiones. Sin dolor y sin sufrimiento. ¡Agenda tu sesión y ven a ver los resultados por ti misma! ¿Estás lista para darle ese toque a tus glúteos? Cuéntame en los comentarios. ¡Agenda ahora y conquista los glúteos de tus sueños!</p>
-                </div>
-            </div>
-
-            <!-- Video Corporal pagina33 -->
-            <div class="media-item">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/36.jpg">
-                        <source src="img/videosenlinea/corporales/pagina33.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Criolipólisis para Grasa Localizada</h3>
-                    <p class="media-leyenda">¡Es hora de decir adiós definitivamente a esa grasita que insiste en quedarse! Con la criolipólisis, puedes eliminar la grasa localizada de forma eficaz y sin cirugía. Resultados visibles después de algunas sesiones. Proceso rápido y no invasivo. Ideal para áreas específicas de grasa. ¿Quién más ha escuchado hablar de la criolipólisis? ¡Cuéntame en los comentarios si también quieres deshacerte de la grasa localizada! Agenda tu evaluación y ven a conocer este increíble tratamiento.</p>
-                </div>
-            </div>
-
-            <!-- Video Corporal pagina34 -->
-            <div class="media-item reverse">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/37.jpg">
-                        <source src="img/videosenlinea/corporales/pagina34.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Detox Corporal</h3>
-                    <p class="media-leyenda">¿Tu cuerpo está sobrecargado? Un detox puede ser justo lo que necesitas para transformar tu salud y sentir más energía en tu día a día. Elimina toxinas. Mejora la digestión y el metabolismo. Aumenta la energía y el bienestar. Desintoxica el organismo de forma natural. ¿Qué tal darle un reseteo a tu cuerpo y sentirte renovada? ¡Cuéntame en los comentarios cómo cuidas de tu cuerpo! Agenda tu sesión de detox y siente la transformación en tu salud.</p>
-                </div>
-            </div>
-
-            <!-- Video Corporal pagina36 -->
-            <div class="media-item">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/38.jpg">
-                        <source src="img/videosenlinea/corporales/pagina36.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Tratamiento de Celulitis</h3>
-                    <p class="media-leyenda">Si quieres decir adiós a la celulitis y tener un cuerpo más modelado y tonificado, ¡tenemos la técnica que es la clave para resultados increíbles! Elimina la celulitis y mejora la apariencia de la piel. Modela el cuerpo y redefine las curvas. Resultados rápidos y eficaces. ¿Quieres saber más sobre este tratamiento y cómo puede transformar tu cuerpo? ¡Envíame un mensaje directo para más detalles!</p>
-                </div>
-            </div>
-
-            <!-- Video Corporal pagina38 -->
-            <div class="media-item reverse">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/39.jpg">
-                        <source src="img/videosenlinea/corporales/pagina38.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Peeling Corporal</h3>
-                    <p class="media-leyenda">¡El peeling corporal puede ser la solución que buscas para transformar tu piel! Ayuda a renovar la textura y mejorar el aspecto de manchas y cicatrices, dejando la piel más lisa y uniforme. Reduce manchas y cicatrices. Mejora la textura de la piel. Deja la piel más suave y radiante. ¿Has pensado en darle un impulso a tu piel? ¡Envíame un mensaje directo para saber más sobre el peeling corporal y agendar tu sesión! ¡Transforma tu piel con el peeling corporal!</p>
-                </div>
-            </div>
-
-            <!-- Video Corporal pagina39 -->
-            <div class="media-item">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/40.jpg">
-                        <source src="img/videosenlinea/corporales/pagina39.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Eliminación de Grasa Localizada</h3>
-                    <p class="media-leyenda">¿Haces de todo y esa grasita insiste en quedarse? ¡No te preocupes! ¡Existe una solución eficaz para eliminar la grasa localizada de una vez por todas, sin necesidad de dietas restrictivas o ejercicios interminables! Tenemos para ofrecerte los tratamientos más avanzados y procedimientos increíbles. ¡Envíame un mensaje directo para agendar tu evaluación y descubrir la solución ideal para ti! ¡Di adiós a la grasa localizada y conquista el cuerpo que mereces!</p>
-                </div>
-            </div>
-
-            <!-- Video Corporal pagina42 -->
-            <div class="media-item reverse">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/41.jpg">
-                        <source src="img/videosenlinea/corporales/pagina42.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Tratamientos para Celulitis</h3>
-                    <p class="media-leyenda">Existen tratamientos increíbles que pueden ayudar a mejorar la apariencia de la piel y reducir la celulitis de manera eficaz, como: Radiofrecuencia: Estimula la producción de colágeno, mejora la firmeza y reduce la celulitis, dejando la piel más lisa y tonificada. Carboxiterapia: Inyección de gas carbónico bajo la piel, que ayuda a mejorar la circulación y reducir la celulitis, además de promover el rejuvenecimiento. Drenaje Linfático: Ayuda a reducir la retención de líquidos, la hinchazón y mejora la circulación, contribuyendo a la disminución de la celulitis y proporcionando una sensación de ligereza. Masaje Modelador: Técnica de presión que ayuda a romper las células de grasa y reduce la apariencia de la celulitis, remodelando el cuerpo y tonificando la piel. ¿Quieres saber más sobre qué tratamiento es ideal para ti? ¡Envíame un mensaje directo para más detalles! ¡Agenda tu evaluación y transforma la apariencia de tu piel!</p>
-                </div>
-            </div>
-
-            <!-- Video Corporal pagina45 -->
-            <div class="media-item">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/42.jpg">
-                        <source src="img/videosenlinea/corporales/pagina45.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Tratamiento de Estrías</h3>
-                    <p class="media-leyenda">¡Sí, puedes suavizar la textura, el tono y hasta la visibilidad de tus estrías con tratamientos estéticos efectivos! Existen tratamientos que ayudan a reducir la apariencia de las estrías, haciendo que se vuelvan menos visibles y dejando tu piel más uniforme y tonificada. ¿Quieres saber más sobre cómo mejorar la apariencia de tus estrías? ¡Envíame un mensaje directo y hablemos sobre el tratamiento ideal para ti! ¡Agenda tu evaluación y da el primer paso hacia una piel más uniforme!</p>
-                </div>
-            </div>
-
-            <!-- Video Corporal pagina46 -->
-            <div class="media-item reverse">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/43.jpg">
-                        <source src="img/videosenlinea/corporales/pagina46.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Firmeza y Tonificación</h3>
-                    <p class="media-leyenda">Con los tratamientos adecuados, puedes mejorar la elasticidad de la piel, combatir la flacidez y lograr un resultado natural y duradero. Firmeza y tonificación de la piel. Aumento de la producción de colágeno, esencial para mantener la piel joven y resistente. Mejora de la textura de la piel, dejándola más suave y uniforme. Resultados visibles en pocas sesiones, con mínimo malestar y sin necesidad de recuperación. Ofrecemos tratamientos seguros y mínimamente invasivos, diseñados para garantizar tu seguridad y los mejores resultados. ¿Quieres saber cómo podemos ayudarte a tener una piel más firme y rejuvenecida? ¡Envíame un mensaje directo para agendar tu evaluación!</p>
-                </div>
-            </div>
-
-            <!-- Video Corporal pagina48 -->
-            <div class="media-item">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/44.jpg">
-                        <source src="img/videosenlinea/corporales/pagina48.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Reducción de Grasa Localizada en Áreas Específicas</h3>
-                    <p class="media-leyenda">Algunas áreas del cuerpo realmente acumulan grasa más rápido y de forma más persistente, como en el abdomen y los brazos. Esto puede estar influenciado por diversos factores como genética, hormonas y hasta el estilo de vida. ¡Pero la buena noticia es que tengo el tratamiento adecuado para reducir esas grasitas localizadas y ayudarte a modelar tu cuerpo de manera eficaz! Reducción de grasa localizada en áreas específicas. Mejora de la circulación y aceleración del metabolismo. Resultados naturales y duraderos, con tratamientos mínimamente invasivos y sin necesidad de cirugía. Si quieres saber cómo eliminar la grasa localizada y conquistar el cuerpo de tus sueños, ¡envíame un mensaje directo y agenda tu evaluación! ¡Vamos juntas a alcanzar tu objetivo!</p>
-                </div>
-            </div>
-
-            <!-- Video Corporal pagina50 -->
-            <div class="media-item reverse">
-                <div class="media-container">
-                    <video class="media-video" controls poster="img/piezasenlinea/45.jpg">
-                        <source src="img/videosenlinea/corporales/pagina50.mp4" type="video/mp4">
-                        Tu navegador no soporta videos HTML5.
-                    </video>
-                </div>
-                <div class="media-content">
-                    <h3 class="media-title">Recuperación de Firmeza después del Emagrecimiento</h3>
-                    <p class="media-leyenda">Si sientes que pierdes peso, mas no ganas firmeza, tal vez estés ignorando un factor muy importante: la falta de estímulo para la producción de colágeno y la falta de tonificación muscular durante el proceso de emagrecimiento. Cuando emagrecemos, es posible que la piel pierda elasticidad y la musculatura se debilite, resultando en la flacidez. Mas la buena noticia es que existe una forma de recuperar la firmeza y el contorno corporal mesmo después de la pérdida de peso! La solución para la flacidez: Estimulación del colágeno: Tratamientos que activan la producción de colágeno, mejorando la firmeza y la elasticidad de la piel. Tonificación muscular: Técnicas que ayudan a fortalecer y tonificar los músculos, dando forma y sustentación al cuerpo. Mejora de la circulación: Estimular la circulación sanguínea ayuda a promover una piel más firme y saludable. No dejes que la flacidez te impida aprovechar tu emagrecimiento! Me chama no direct para descubrir el tratamiento ideal para recuperar la firmeza de tu piel!</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sección Masajes -->
-    <section id="masajes" class="tratamientos-section">
-        <div class="container">
-            <h2 class="section-title">Masajes de Relajación</h2>
-            
-            <div class="media-grid">
-                <div class="media-card">
-                    <img src="img/piezasenlinea/24.jpg" alt="Masaje relajante" class="media-image">
-                    <div class="media-content">
-                        <h4>Masaje Relajante</h4>
-                        <p>Alivia el estrés y la tensión con nuestro masaje terapéutico completo. Una experiencia de relajación profunda que renueva tu energía.</p>
-                    </div>
-                </div>
-                <div class="media-card">
-                    <img src="img/piezasenlinea/26.jpg" alt="Masaje descontracturante" class="media-image">
-                    <div class="media-content">
-                        <h4>Masaje Descontracturante</h4>
-                        <p>Elimina contracturas y alivia dolores musculares de forma profesional. Técnicas especializadas para tu bienestar.</p>
-                    </div>
-                </div>
-                <div class="media-card">
-                    <img src="img/piezasenlinea/27.jpg" alt="Masaje aromaterapia" class="media-image">
-                    <div class="media-content">
-                        <h4>Masaje Aromaterapia</h4>
-                        <p>Combina técnicas de masaje con aceites esenciales para una experiencia única de relajación y bienestar.</p>
-                    </div>
-                </div>
-                <div class="media-card">
-                    <img src="img/piezasenlinea/28.jpg" alt="Masaje" class="media-image">
-                    <div class="media-content">
-                        <h4>Masaje Terapéutico</h4>
-                        <p>Tratamientos especializados para aliviar tensiones y mejorar tu bienestar general.</p>
-                    </div>
-                </div>
-                <div class="media-card">
-                    <img src="img/piezasenlinea/29.jpg" alt="Masaje" class="media-image">
-                    <div class="media-content">
-                        <h4>Masaje Deportivo</h4>
-                        <p>Ideal para deportistas y personas activas que buscan recuperación muscular.</p>
-                    </div>
-                </div>
-                <div class="media-card">
-                    <img src="img/piezasenlinea/30.jpg" alt="Masaje" class="media-image">
-                    <div class="media-content">
-                        <h4>Masaje Reductivo</h4>
-                        <p>Combina técnicas de masaje con tratamientos para modelar tu figura.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sección Agenda tu Cita -->
-    <section id="agenda" class="agenda-section">
-        <div class="container">
-            <h2 class="section-title">Agenda tu Cita</h2>
-            <p class="section-subtitle">Reserva tu momento de bienestar y belleza</p>
-            
-            <div class="agenda-form-container">
+            <div class="modal-content">
+                <h2>Agenda tu Cita</h2>
+                <p class="agenda-subtitle">Reserva tu momento de bienestar y belleza</p>
                 <form id="agendaForm" class="agenda-form">
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="agendaNombre">Nombre completo *</label>
-                            <input type="text" id="agendaNombre" name="nombre" required placeholder="Ingresa tu nombre">
+                            <input type="text" id="agendaNombre" name="nombre" required placeholder="Nombre completo *">
                         </div>
                         <div class="form-group">
-                            <label for="agendaCorreo">Correo electrónico *</label>
-                            <input type="email" id="agendaCorreo" name="correo" required placeholder="tu@correo.com">
+                            <input type="email" id="agendaCorreo" name="correo" required placeholder="Correo electrónico *">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="agendaCelular">Celular *</label>
-                            <input type="tel" id="agendaCelular" name="celular" required placeholder="300 123 4567">
+                            <input type="tel" id="agendaCelular" name="celular" required placeholder="Celular *">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group date-group">
                             <label for="agendaFecha">Fecha deseada *</label>
-                            <div class="date-picker-wrapper">
-                                <input type="date" id="agendaFecha" name="fecha" required>
-                                <div id="calendarContainer" class="calendar-container"></div>
-                            </div>
+                            <input type="date" id="agendaFecha" name="fecha" required>
+                            <div id="calendarContainer" class="calendar-container"></div>
                             <div id="fechaStatus" class="fecha-status"></div>
-                            <!-- Selector visual de horas -->
                             <div id="horasDisponiblesContainer" class="horas-disponibles-container" style="display: none;">
                                 <h4 class="horas-title">Selecciona una hora disponible</h4>
                                 <div id="horasGrid" class="horas-grid"></div>
@@ -1017,114 +284,130 @@
                             <div id="horaStatus" class="hora-status"></div>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="agendaServicio">Servicio de interés *</label>
-                            <select id="agendaServicio" name="servicio" required>
-                                <option value="">Selecciona un servicio</option>
-                                <option value="Limpieza Facial">Limpieza Facial</option>
-                                <option value="Peeling Facial">Peeling Facial</option>
-                                <option value="Reducción de Medidas">Reducción de Medidas</option>
-                                <option value="Exfoliación Corporal">Exfoliación Corporal</option>
-                                <option value="Hidratación Corporal">Hidratación Corporal</option>
-                                <option value="Masaje Relajante">Masaje Relajante</option>
-                                <option value="Masaje Descontracturante">Masaje Descontracturante</option>
-                                <option value="Masaje Aromaterapia">Masaje Aromaterapia</option>
-                                <option value="Otro">Otro</option>
-                            </select>
-                        </div>
+                    <div class="form-group">
+                        <select id="agendaServicio" name="servicio" required>
+                            <option value="">Selecciona un servicio *</option>
+                            <option value="Limpieza Facial">Limpieza Facial</option>
+                            <option value="Peeling Facial">Peeling Facial</option>
+                            <option value="Reducción de Medidas">Reducción de Medidas</option>
+                            <option value="Exfoliación Corporal">Exfoliación Corporal</option>
+                            <option value="Hidratación Corporal">Hidratación Corporal</option>
+                            <option value="Masaje Relajante">Masaje Relajante</option>
+                            <option value="Masaje Descontracturante">Masaje Descontracturante</option>
+                            <option value="Masaje Aromaterapia">Masaje Aromaterapia</option>
+                            <option value="Otro">Otro</option>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label for="agendaMensaje">Mensaje adicional (opcional)</label>
-                        <textarea id="agendaMensaje" name="mensaje" rows="4" placeholder="Cuéntanos sobre tus necesidades o preferencias..."></textarea>
+                        <textarea id="agendaMensaje" name="mensaje" rows="4" placeholder="Mensaje adicional (opcional)"></textarea>
                     </div>
-                    <button type="submit" class="btn-submit btn-agenda">Agendar Cita</button>
+                    <button type="submit" class="btn btn-agenda">Agendar Cita</button>
                 </form>
                 <div id="agendaMessage" class="form-message"></div>
             </div>
         </div>
-    </section>
-
-    <!-- Sección Contacto -->
-    <section id="contacto" class="contacto-section">
-        <div class="container">
-            <h2 class="section-title">Contáctanos</h2>
-            <div class="contacto-content">
-                <div class="contacto-info">
-                    <div class="contacto-item">
-                        <h3>Información de Contacto</h3>
-                        <p><strong>Ubicación:</strong> San Pedro de los Milagros, Antioquia</p>
-                        <p><strong>Teléfono:</strong> <a href="tel:+573103709731">(310) 370-97-31</a> -- <a href="tel:+573116319294">(311) 631-92-94</a></p>
-                        <p><strong>Correo:</strong> <a href="mailto:info@enlineaspa.com">info@enlineaspa.com</a></p>
-                        <p><strong>Horario:</strong> Lunes a Sábado 9:00 AM - 7:00 PM</p>
-                    </div>
-                    <div class="contacto-item">
-                        <h3>Síguenos</h3>
-                        <div class="social-links">
-                            <a href="#" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                                <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                                </svg>
-                                <span>Facebook</span>
-                            </a>
-                            <a href="#" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                                <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                                </svg>
-                                <span>Instagram</span>
-                            </a>
-                            <a href="https://wa.me/573116319294?text=Hola,%20me%20gustaría%20solicitar%20información%20sobre%20sus%20servicios" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-                                <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-                                </svg>
-                                <span>WhatsApp</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="contacto-mapa">
-                    <h3>Nuestra Ubicación</h3>
-                    <div class="mapa-container">
-                        <iframe 
-                            src="https://www.google.com/maps?q=6.461133,-75.555624&hl=es&z=15&output=embed"
-                            width="100%" 
-                            height="400" 
-                            style="border:0; border-radius: 15px;" 
-                            allowfullscreen="" 
-                            loading="lazy" 
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
-                    </div>
-                    <p class="mapa-coordenadas">📍 Coordenadas: 6.461133, -75.555624</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <img src="330. En línea SPA/MARCA DE AGUA/MARCA DE AGUA_Mesa de trabajo 1.png" alt="En Línea Spa Logo" class="logo-img">
-                </div>
-                <p>&copy; 2024 En Línea Spa. Todos los derechos reservados.</p>
-            </div>
+    <footer class="main-footer">
+        <div class="footer-content">
+            <img src="330. En línea SPA/JPG Y PNG/PNG_Mesa de trabajo 1 copia 6.png" alt="En Línea Spa" class="footer-logo">
+            <p class="footer-copyright">&copy; 2024 En Línea Spa. Todos los derechos reservados.</p>
         </div>
     </footer>
 
     <!-- Botón Flotante de WhatsApp -->
     <a href="https://wa.me/573116319294?text=Hola,%20me%20gustaría%20solicitar%20información%20sobre%20sus%20servicios" 
-       class="whatsapp-float" 
+       class="wspp-float" 
        target="_blank" 
        rel="noopener noreferrer" 
        aria-label="Contactar por WhatsApp">
         <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="currentColor">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
         </svg>
-        <span class="whatsapp-pulse"></span>
     </a>
 
     <script src="script.js"></script>
+    <script>
+        // Slider functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const indicators = document.querySelectorAll('.indicator');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            
+            if (index >= totalSlides) {
+                currentSlide = 0;
+            } else if (index < 0) {
+                currentSlide = totalSlides - 1;
+            } else {
+                currentSlide = index;
+            }
+            
+            slides[currentSlide].classList.add('active');
+            indicators[currentSlide].classList.add('active');
+        }
+
+        function changeSlide(direction) {
+            showSlide(currentSlide + direction);
+        }
+
+        // Auto-play slider
+        setInterval(() => {
+            changeSlide(1);
+        }, 5000);
+
+        // Click en indicadores
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                showSlide(index);
+            });
+        });
+
+        // Funciones de modales
+        function abrirModalDescuento() {
+            document.getElementById('modalDescuento').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function cerrarModalDescuento() {
+            document.getElementById('modalDescuento').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function abrirModalAgenda() {
+            document.getElementById('modalAgenda').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function cerrarModalAgenda() {
+            document.getElementById('modalAgenda').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Cerrar modales al hacer clic fuera
+        document.getElementById('modalDescuento').addEventListener('click', function(e) {
+            if (e.target === this) {
+                cerrarModalDescuento();
+            }
+        });
+
+        document.getElementById('modalAgenda').addEventListener('click', function(e) {
+            if (e.target === this) {
+                cerrarModalAgenda();
+            }
+        });
+
+        // Cerrar con ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                cerrarModalDescuento();
+                cerrarModalAgenda();
+            }
+        });
+    </script>
 </body>
 </html>
