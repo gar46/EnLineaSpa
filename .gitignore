@@ -1,0 +1,41 @@
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+
+# Editores
+.vscode/
+.idea/
+*.code-workspace
+
+# Archivos temporales
+*.tmp
+*.log
+*.bak
+*.cache
+*.md
+
+# Node modules (si en el futuro usas Node.js)
+node_modules/
+npm-debug.log
+
+# Build files (si en el futuro compilas assets)
+dist/
+build/
+
+# Archivos de configuración local
+.env
+.env.local
+config.local.js
+
+# Nota: NO excluir los siguientes (necesarios para el sitio):
+# - index.html
+# - styles.css
+# - script.js
+# - google-apps-script.js
+# - img/
+# - 330. En línea SPA/
+# - Todos los archivos de documentación (.md)
+
