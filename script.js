@@ -1,6 +1,6 @@
 // Configuración de Google Sheets
 // IMPORTANTE: Reemplaza esta URL con la URL de tu Google Apps Script Web App
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwCIfpvF3Vz6Mv5wjTN3WHSM2GLlt6mOKWOizeHiiFOFzhZbQEcFhN8z5kY5lRdfQqE/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwOrCX2G__g4Hj3gKjlMuTpgFE9WBiHVuHjj2s3g4mkUPpjbpEOYW7szDXJZ45LOga1/exec';
 
 // Función para enviar datos a Google Sheets
 async function enviarAGoogleSheets(datos) {
@@ -18,22 +18,35 @@ async function enviarAGoogleSheets(datos) {
             const response = await fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
                 mode: 'cors',
+                redirect: 'follow', // Seguir redirecciones automáticamente
+                credentials: 'omit', // No enviar cookies
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
                 body: formData.toString()
             });
             
-            if (response.ok) {
-                const result = await response.json();
-                return result;
-            } else {
-                const text = await response.text();
+            console.log('📥 POST Estado de respuesta:', response.status, response.statusText);
+            
+            const responseText = await response.text();
+            console.log('📄 POST Respuesta texto (primeros 300 caracteres):', responseText.substring(0, 300));
+            
+            if (response.ok || response.status === 200) {
                 try {
-                    const result = JSON.parse(text);
+                    const result = JSON.parse(responseText);
+                    console.log('✅ POST Respuesta exitosa:', result);
+                    return result;
+                } catch (parseError) {
+                    console.error('❌ Error al parsear respuesta POST:', parseError);
+                    return { success: false, error: 'Error al parsear la respuesta del servidor' };
+                }
+            } else {
+                try {
+                    const result = JSON.parse(responseText);
                     return result;
                 } catch (e) {
-                    return { success: false, error: text || 'Error al procesar la solicitud' };
+                    console.error('❌ Error en POST:', response.status, responseText);
+                    return { success: false, error: responseText || 'Error al procesar la solicitud' };
                 }
             }
         } catch (fetchError) {
@@ -223,51 +236,261 @@ let currentMonth = new Date().getMonth();
 let currentYear = new Date().getFullYear();
 
 // Cargar citas reservadas
-async function cargarCitasReservadas() {
+// Función para normalizar fechas a formato YYYY-MM-DD
+function normalizarFecha(fecha) {
+    if (!fecha) return '';
+    
+    // Si es un objeto Date, convertir a string
+    if (fecha instanceof Date) {
+        const year = fecha.getFullYear();
+        const month = String(fecha.getMonth() + 1).padStart(2, '0');
+        const day = String(fecha.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+    
+    // Si ya es string, intentar parsearlo
+    const fechaStr = fecha.toString().trim();
+    
+    // Si ya está en formato YYYY-MM-DD, devolverlo
+    if (/^\d{4}-\d{2}-\d{2}$/.test(fechaStr)) {
+        return fechaStr;
+    }
+    
+    // Intentar parsear otros formatos
     try {
-        // Intentar cargar desde localStorage primero
-        const citasLocal = JSON.parse(localStorage.getItem('citas') || '[]');
-        citasReservadas = citasLocal;
+        const fechaObj = new Date(fechaStr);
+        if (!isNaN(fechaObj.getTime())) {
+            const year = fechaObj.getFullYear();
+            const month = String(fechaObj.getMonth() + 1).padStart(2, '0');
+            const day = String(fechaObj.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+    } catch (e) {
+        console.log('Error al normalizar fecha:', fechaStr, e);
+    }
+    
+    return fechaStr;
+}
+
+// Hacer función global para que esté disponible desde el HTML
+window.cargarCitasReservadas = async function cargarCitasReservadas() {
+    try {
+        // Primero intentar cargar desde Google Sheets
+        if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL !== 'TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUI') {
+            try {
+                const url = `${GOOGLE_SCRIPT_URL}?action=getCitas`;
+                console.log('Cargando citas desde:', url);
+                
+                // Google Apps Script puede redirigir (302), necesitamos seguir la redirección
+                const response = await fetch(url, {
+                    method: 'GET',
+                    mode: 'cors',
+                    cache: 'no-cache',
+                    redirect: 'follow' // Seguir redirecciones automáticamente
+                });
+                
+                console.log('📥 Estado de respuesta:', response.status, response.statusText);
+                
+                // Google Apps Script puede devolver 302 (redirección) que fetch sigue automáticamente
+                // La respuesta final debería ser 200 OK después de seguir la redirección
+                if (response.ok || response.status === 200 || response.status === 302) {
+                    let responseText = '';
+                    try {
+                        responseText = await response.text();
+                    } catch (textError) {
+                        console.error('❌ Error al leer respuesta:', textError);
+                        throw textError;
+                    }
+                    
+                    console.log('📄 Respuesta texto (primeros 500 caracteres):', responseText.substring(0, 500));
+                    
+                    // Si la respuesta es una página HTML de Google (error de autenticación), lanzar error
+                    if (responseText.includes('<html') || responseText.includes('<!DOCTYPE')) {
+                        console.error('❌ Google está mostrando una página HTML en lugar de JSON');
+                        console.error('Esto significa que la aplicación web no está configurada correctamente');
+                        throw new Error('La aplicación web de Google Apps Script requiere autenticación o no está desplegada correctamente');
+                    }
+                    
+                    let result;
+                    try {
+                        result = JSON.parse(responseText);
+                    } catch (parseError) {
+                        console.error('❌ Error al parsear JSON:', parseError);
+                        console.error('📄 Texto completo de respuesta:', responseText);
+                        throw new Error('Respuesta no válida de Google Apps Script: ' + responseText.substring(0, 200));
+                    }
+                    
+                    console.log('✅ Respuesta parseada correctamente:', result);
+                    
+                    if (result.success && result.citas && Array.isArray(result.citas)) {
+                        citasReservadas = result.citas.map(cita => {
+                            const fechaNormalizada = normalizarFecha(cita.fecha);
+                            const horaNormalizada = normalizarHora(cita.hora);
+                            return {
+                                fecha: fechaNormalizada,
+                                hora: horaNormalizada,
+                                servicio: cita.servicio || '',
+                                nombre: cita.nombre || ''
+                            };
+                        }).filter(cita => {
+                            // Solo incluir citas con fecha y hora válidas en formato correcto
+                            const fechaValida = cita.fecha && /^\d{4}-\d{2}-\d{2}$/.test(cita.fecha);
+                            const horaValida = cita.hora && /^\d{2}:\d{2}$/.test(cita.hora);
+                            return fechaValida && horaValida;
+                        });
+                        
+                        // Guardar en localStorage como respaldo
+                        localStorage.setItem('citas', JSON.stringify(citasReservadas));
+                        console.log('✅ Citas cargadas desde Google Sheets. Total:', citasReservadas.length);
+                        if (citasReservadas.length > 0) {
+                            console.log('📅 Primeras 3 citas:', citasReservadas.slice(0, 3));
+                        }
+                        return;
+                    } else {
+                        console.log('⚠️ Respuesta no exitosa o sin citas:', result);
+                        if (result.error) {
+                            console.error('❌ Error reportado por Google Apps Script:', result.error);
+                        }
+                    }
+                } else {
+                    console.log('⚠️ Error en respuesta HTTP:', response.status, response.statusText);
+                    const text = await response.text();
+                    console.log('Respuesta:', text);
+                }
+            } catch (fetchError) {
+                console.error('❌ Error al cargar citas desde Google Sheets:', fetchError);
+                console.error('Detalles del error:', fetchError.message, fetchError.stack);
+                // Continuar para cargar desde localStorage como respaldo
+            }
+        } else {
+            console.log('⚠️ URL de Google Script no configurada');
+        }
         
-        console.log('Citas cargadas desde localStorage. Total:', citasReservadas.length);
+        // Si no se pudo cargar desde Google Sheets, cargar desde localStorage
+        const citasLocal = JSON.parse(localStorage.getItem('citas') || '[]');
+        citasReservadas = citasLocal.map(cita => ({
+            fecha: normalizarFecha(cita.fecha),
+            hora: normalizarHora(cita.hora),
+            servicio: cita.servicio || '',
+            nombre: cita.nombre || ''
+        })).filter(cita => {
+            // Solo incluir citas con fecha y hora válidas en formato correcto
+            const fechaValida = cita.fecha && /^\d{4}-\d{2}-\d{2}$/.test(cita.fecha);
+            const horaValida = cita.hora && /^\d{2}:\d{2}$/.test(cita.hora);
+            return fechaValida && horaValida;
+        });
+        
+        console.log('✅ Citas cargadas desde localStorage. Total:', citasReservadas.length);
     } catch (error) {
-        console.log('Error al cargar citas:', error);
+        console.error('❌ Error al cargar citas:', error);
         citasReservadas = [];
     }
 }
 
 // Verificar si una fecha/hora está reservada
 function estaReservada(fecha, hora) {
-    const fechaNormalizada = (fecha || '').toString().trim();
+    const fechaNormalizada = normalizarFecha(fecha);
     const horaNormalizada = (hora || '').toString().trim();
     
-    return citasReservadas.some(cita => {
-        const citaFecha = (cita.fecha || '').toString().trim();
+    const reservada = citasReservadas.some(cita => {
+        const citaFecha = normalizarFecha(cita.fecha);
         const citaHora = (cita.hora || '').toString().trim();
-        return citaFecha === fechaNormalizada && citaHora === horaNormalizada;
+        const coincide = citaFecha === fechaNormalizada && citaHora === horaNormalizada;
+        if (coincide) {
+            console.log('🔴 Cita reservada encontrada:', { fecha: citaFecha, hora: citaHora, nombre: cita.nombre });
+        }
+        return coincide;
     });
+    
+    if (reservada) {
+        console.log('🔴 Fecha y hora ya están reservadas:', { fecha: fechaNormalizada, hora: horaNormalizada });
+    }
+    
+    return reservada;
+}
+
+// Función para normalizar horas a formato HH:MM
+function normalizarHora(hora) {
+    if (!hora) return '';
+    
+    // Si es string, limpiarlo
+    let horaStr = hora.toString().trim();
+    
+    // Si ya está en formato HH:MM, devolverlo
+    if (/^\d{2}:\d{2}$/.test(horaStr)) {
+        return horaStr;
+    }
+    
+    // Si tiene formato de fecha/hora (Date object o string con fecha), extraer solo la hora
+    if (hora instanceof Date) {
+        const hours = String(hora.getHours()).padStart(2, '0');
+        const minutes = String(hora.getMinutes()).padStart(2, '0');
+        return `${hours}:${minutes}`;
+    }
+    
+    // Intentar extraer la hora de un string que contiene fecha/hora
+    const match = horaStr.match(/(\d{1,2}):(\d{2})/);
+    if (match) {
+        const h = String(parseInt(match[1])).padStart(2, '0');
+        const m = String(parseInt(match[2])).padStart(2, '0');
+        return `${h}:${m}`;
+    }
+    
+    // Si tiene formato diferente, intentar parsear
+    try {
+        const horaDate = new Date('2000-01-01T' + horaStr);
+        if (!isNaN(horaDate.getTime())) {
+            const hours = String(horaDate.getHours()).padStart(2, '0');
+            const minutes = String(horaDate.getMinutes()).padStart(2, '0');
+            return `${hours}:${minutes}`;
+        }
+    } catch (e) {
+        // Si falla, devolver los primeros 5 caracteres o el string original
+        return horaStr.substring(0, 5).trim();
+    }
+    
+    return horaStr.substring(0, 5).trim();
 }
 
 // Obtener horas ocupadas para una fecha
 function obtenerHorasOcupadas(fecha) {
-    const fechaNormalizada = (fecha || '').toString().trim();
+    const fechaNormalizada = normalizarFecha(fecha);
     
-    return citasReservadas
+    const horasOcupadas = citasReservadas
         .filter(cita => {
-            const citaFecha = (cita.fecha || '').toString().trim();
+            const citaFecha = normalizarFecha(cita.fecha);
             return citaFecha === fechaNormalizada;
         })
-        .map(cita => (cita.hora || '').toString().trim())
-        .filter(hora => hora);
+        .map(cita => {
+            const horaNormalizada = normalizarHora(cita.hora);
+            return horaNormalizada;
+        })
+        .filter(hora => hora && /^\d{2}:\d{2}$/.test(hora)); // Solo incluir horas válidas en formato HH:MM
+    
+    if (horasOcupadas.length > 0) {
+        console.log(`📅 Horas ocupadas para ${fechaNormalizada}:`, horasOcupadas);
+    }
+    
+    return horasOcupadas;
 }
 
-// Renderizar calendario
-function renderizarCalendario() {
+// Renderizar calendario - Hacer función global
+window.renderizarCalendario = function renderizarCalendario() {
     const calendarContainer = document.getElementById('calendarContainer');
-    if (!calendarContainer) return;
+    if (!calendarContainer) {
+        console.warn('⚠️ calendarContainer no encontrado. El modal puede no estar abierto todavía.');
+        return;
+    }
     
     const fechaInput = document.getElementById('agendaFecha');
-    if (!fechaInput) return;
+    if (!fechaInput) {
+        console.warn('⚠️ agendaFecha no encontrado.');
+        return;
+    }
+    
+    // Asegurar que el contenedor del calendario sea visible
+    calendarContainer.style.display = 'block';
+    calendarContainer.style.visibility = 'visible';
     
     const fechaStatus = document.getElementById('fechaStatus');
     
@@ -340,7 +563,22 @@ function renderizarCalendario() {
     }
     
     html += '</div>';
+    
+    // Insertar el HTML en el contenedor
     calendarContainer.innerHTML = html;
+    
+    // Asegurar que el calendario sea visible después de renderizar
+    calendarContainer.style.display = 'block';
+    calendarContainer.style.visibility = 'visible';
+    calendarContainer.style.opacity = '1';
+    calendarContainer.style.height = 'auto';
+    calendarContainer.style.minHeight = '300px';
+    calendarContainer.style.width = '100%';
+    
+    console.log('✅ Calendario renderizado correctamente. Días del mes:', daysInMonth);
+    console.log('✅ Contenedor:', calendarContainer);
+    console.log('✅ HTML insertado, longitud:', html.length);
+    console.log('✅ Elementos hijos:', calendarContainer.children.length);
     
     // Actualizar estado de la fecha seleccionada
     if (selectedDate) {
@@ -418,11 +656,19 @@ function mostrarHorasDisponibles(fecha) {
     
     let html = '';
     todasHoras.forEach(hora => {
-        const estaOcupada = horasOcupadas.includes(hora.value);
+        // Normalizar la hora para comparación
+        const horaNormalizada = normalizarHora(hora.value);
+        const estaOcupada = horasOcupadas.some(horaOcupada => {
+            const horaOcupadaNormalizada = normalizarHora(horaOcupada);
+            return horaOcupadaNormalizada === horaNormalizada;
+        });
+        
         const horaClass = estaOcupada ? 'hora-disponible-item ocupada' : 'hora-disponible-item disponible';
+        const onClickHandler = estaOcupada ? 'return false;' : `seleccionarHora('${hora.value}')`;
+        
         html += `
-            <div class="${horaClass}" data-hora="${hora.value}" onclick="seleccionarHora('${hora.value}')">
-                ${hora.label}
+            <div class="${horaClass}" data-hora="${hora.value}" onclick="${onClickHandler}" ${estaOcupada ? 'title="Esta hora ya está reservada"' : ''}>
+                ${estaOcupada ? '🚫 ' : ''}${hora.label}${estaOcupada ? ' (Ocupada)' : ''}
             </div>
         `;
     });
@@ -436,6 +682,8 @@ function mostrarHorasDisponibles(fecha) {
     if (horasTitle) {
         horasTitle.textContent = `Selecciona una hora disponible (${horasDisponibles} disponibles)`;
     }
+    
+    console.log('✅ Horas renderizadas. Ocupadas:', horasOcupadas.length, 'Disponibles:', horasDisponibles);
     
     // Limpiar selección previa
     horaHiddenInput.value = '';
@@ -509,9 +757,10 @@ const agendaForm = document.getElementById('agendaForm');
 const agendaMessage = document.getElementById('agendaMessage');
 
 if (agendaForm) {
-    // Cargar citas reservadas al iniciar
-    cargarCitasReservadas().then(() => {
-        renderizarCalendario();
+    // NO renderizar el calendario al iniciar, solo cuando se abra el modal
+    // Cargar citas reservadas al iniciar (para tenerlas listas)
+    cargarCitasReservadas().catch(error => {
+        console.error('Error al cargar citas iniciales:', error);
     });
     
     // Configurar fecha mínima como hoy
@@ -520,11 +769,29 @@ if (agendaForm) {
         const hoy = new Date().toISOString().split('T')[0];
         fechaInput.setAttribute('min', hoy);
         
-        // Mostrar calendario al hacer clic
+        // Mostrar calendario al hacer clic en el campo de fecha
         fechaInput.addEventListener('focus', () => {
             const calendarContainer = document.getElementById('calendarContainer');
             if (calendarContainer) {
                 calendarContainer.style.display = 'block';
+                calendarContainer.style.visibility = 'visible';
+                // Asegurar que el calendario esté renderizado
+                if (!calendarContainer.innerHTML || calendarContainer.innerHTML.trim() === '') {
+                    renderizarCalendario();
+                }
+            }
+        });
+        
+        // Mostrar calendario al hacer clic también
+        fechaInput.addEventListener('click', () => {
+            const calendarContainer = document.getElementById('calendarContainer');
+            if (calendarContainer) {
+                calendarContainer.style.display = 'block';
+                calendarContainer.style.visibility = 'visible';
+                // Asegurar que el calendario esté renderizado
+                if (!calendarContainer.innerHTML || calendarContainer.innerHTML.trim() === '') {
+                    renderizarCalendario();
+                }
             }
         });
         
@@ -533,6 +800,8 @@ if (agendaForm) {
             if (e.target.value) {
                 validarFecha(e.target.value);
                 mostrarHorasDisponibles(e.target.value);
+                // Actualizar el calendario para mostrar la fecha seleccionada
+                renderizarCalendario();
             } else {
                 const horasContainer = document.getElementById('horasDisponiblesContainer');
                 if (horasContainer) {
@@ -576,6 +845,9 @@ if (agendaForm) {
             return;
         }
         
+        // Recargar citas desde Google Sheets antes de validar
+        await cargarCitasReservadas();
+        
         // Validar que la cita no esté ya asignada (misma fecha y hora)
         const fechaNormalizada = fecha.trim();
         const horaNormalizada = hora.trim();
@@ -585,7 +857,7 @@ if (agendaForm) {
             return;
         }
         
-        // Validación adicional: verificar todas las citas en localStorage
+        // Validación adicional: verificar todas las citas en localStorage como respaldo
         const todasLasCitas = JSON.parse(localStorage.getItem('citas') || '[]');
         const citaDuplicada = todasLasCitas.some(cita => {
             const citaFecha = (cita.fecha || '').toString().trim();
@@ -597,8 +869,8 @@ if (agendaForm) {
             mostrarMensaje('⚠️ Lo sentimos, esta fecha y hora ya está reservada. Por favor selecciona otra fecha u hora.', 'error', agendaMessage);
             return;
         }
-        
-        // Deshabilitar botón mientras se procesa
+
+        // Deshabilitar botón mientras se procesa (después de las validaciones)
         const submitButton = agendaForm.querySelector('.btn-agenda');
         const originalText = submitButton ? submitButton.textContent : 'Agendar Cita';
         if (submitButton) {
@@ -629,12 +901,12 @@ if (agendaForm) {
                 mostrarMensaje('¡Cita agendada exitosamente! Te hemos enviado un correo de confirmación.', 'success', agendaMessage);
             }
             
-            // Guardar en localStorage
+            // Guardar en localStorage como respaldo
             todasLasCitas.push(datos);
             localStorage.setItem('citas', JSON.stringify(todasLasCitas));
             
-            // Actualizar citas reservadas
-            citasReservadas.push(datos);
+            // Recargar citas desde Google Sheets para sincronizar
+            await cargarCitasReservadas();
             
             // Limpiar formulario
             agendaForm.reset();
