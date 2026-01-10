@@ -275,30 +275,80 @@ function doGet(e) {
               }
             }
             
-            // Normalizar hora - asegurar que sea solo hora (HH:MM), no fecha/hora
+            // Normalizar hora - extraer solo la hora en formato HH:MM
             let horaFormateada = '';
-            if (horaCita instanceof Date) {
-              // Si es Date object, extraer solo la hora
-              const hours = String(horaCita.getHours()).padStart(2, '0');
-              const minutes = String(horaCita.getMinutes()).padStart(2, '0');
-              horaFormateada = `${hours}:${minutes}`;
-            } else {
-              // Si es string, limpiarlo y asegurar formato HH:MM
-              const horaStr = horaCita.toString().trim();
-              // Si tiene formato de fecha/hora, extraer solo la hora
-              if (horaStr.includes('T') || horaStr.includes(':')) {
-                // Intentar extraer solo la parte de la hora
-                const match = horaStr.match(/(\d{1,2}):(\d{2})/);
-                if (match) {
-                  const h = String(parseInt(match[1])).padStart(2, '0');
-                  const m = String(parseInt(match[2])).padStart(2, '0');
-                  horaFormateada = `${h}:${m}`;
-                } else {
-                  horaFormateada = horaStr.substring(0, 5); // Tomar primeros 5 caracteres (HH:MM)
-                }
-              } else {
-                horaFormateada = horaStr;
+            
+            try {
+              // Primero, intentar usar el método getDisplayValue() si está disponible (mejor opción)
+              // Pero como getDataRange().getValues() devuelve valores raw, necesitamos procesarlos
+              
+              let horaDate = null;
+              let horaStr = '';
+              
+              // Si es Date object, usarlo directamente
+              if (horaCita instanceof Date) {
+                horaDate = horaCita;
+              } 
+              // Si es número (fracción del día en Google Sheets 0.0 a 1.0)
+              else if (typeof horaCita === 'number') {
+                // Google Sheets almacena horas como fracción del día desde 1899-12-30
+                // Ejemplo: 0.75 = 18:00 (6 PM), 0.5 = 12:00 (medio día)
+                const totalMinutes = Math.round(horaCita * 24 * 60);
+                const hours = Math.floor(totalMinutes / 60);
+                const minutes = totalMinutes % 60;
+                horaFormateada = String(hours).padStart(2, '0') + ':' + String(minutes).padStart(2, '0');
+                Logger.log('Hora extraída de número (fracción): ' + horaFormateada + ' (valor: ' + horaCita + ')');
               }
+              // Si es string (puede venir como "Sat Dec 30 1899 18:00:00 GMT-0456")
+              else {
+                horaStr = horaCita.toString().trim();
+                
+                // Intentar parsear como fecha completa primero
+                try {
+                  horaDate = new Date(horaStr);
+                  // Si la fecha es 1899 o 1900, significa que es solo hora en Google Sheets
+                  if (!isNaN(horaDate.getTime())) {
+                    // Extraer hora y minutos directamente, sin importar el año
+                    const hours = horaDate.getHours();
+                    const minutes = horaDate.getMinutes();
+                    horaFormateada = String(hours).padStart(2, '0') + ':' + String(minutes).padStart(2, '0');
+                    Logger.log('Hora extraída de string Date: ' + horaFormateada + ' (original: ' + horaStr + ')');
+                  } else {
+                    throw new Error('No se pudo parsear como Date');
+                  }
+                } catch (e) {
+                  // Si falla parsear como Date, extraer con regex
+                  const match = horaStr.match(/(\d{1,2}):(\d{2})/);
+                  if (match) {
+                    const h = parseInt(match[1]);
+                    const m = parseInt(match[2]);
+                    horaFormateada = String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0');
+                    Logger.log('Hora extraída con regex: ' + horaFormateada + ' (original: ' + horaStr + ')');
+                  } else {
+                    // Último intento: buscar cualquier patrón de hora
+                    const allNumbers = horaStr.match(/\d+/g);
+                    if (allNumbers && allNumbers.length >= 2) {
+                      const h = parseInt(allNumbers[0]);
+                      const m = parseInt(allNumbers[1]);
+                      if (h >= 0 && h <= 23 && m >= 0 && m <= 59) {
+                        horaFormateada = String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0');
+                        Logger.log('Hora extraída de números sueltos: ' + horaFormateada);
+                      }
+                    }
+                  }
+                }
+              }
+              
+              // Si todavía no tenemos la hora formateada pero tenemos un Date object
+              if (!horaFormateada && horaDate && horaDate instanceof Date && !isNaN(horaDate.getTime())) {
+                const hours = horaDate.getHours();
+                const minutes = horaDate.getMinutes();
+                horaFormateada = String(hours).padStart(2, '0') + ':' + String(minutes).padStart(2, '0');
+                Logger.log('Hora extraída de Date object: ' + horaFormateada);
+              }
+              
+            } catch (error) {
+              Logger.log('Error al normalizar hora: ' + error.toString() + ' (valor original: ' + horaCita + ')');
             }
             
             // Solo agregar si la hora está en formato válido (HH:MM)
@@ -311,7 +361,7 @@ function doGet(e) {
               });
               Logger.log('✅ Cita agregada: ' + fechaFormateada + ' a las ' + horaFormateada);
             } else {
-              Logger.log('⚠️ Hora no válida, omitiendo cita: ' + horaFormateada + ' (original: ' + horaCita + ')');
+              Logger.log('⚠️ Hora no válida, omitiendo cita. Original: ' + horaCita + ', Formateada: ' + horaFormateada);
             }
           }
         }
@@ -332,8 +382,12 @@ function doGet(e) {
       const responseJson = JSON.stringify(responseData);
       Logger.log('Respuesta preparada, tamaño: ' + responseJson.length + ' caracteres');
       Logger.log('Total de citas en respuesta: ' + citas.length);
+      if (citas.length > 0) {
+        Logger.log('Primera cita en respuesta: ' + JSON.stringify(citas[0]));
+      }
       
       // Retornar JSON usando ContentService (maneja CORS automáticamente)
+      // ContentService ya incluye los headers CORS necesarios
       return ContentService.createTextOutput(responseJson)
         .setMimeType(ContentService.MimeType.JSON);
     }
