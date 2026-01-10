@@ -425,9 +425,69 @@
             document.body.style.overflow = '';
         }
 
-        function abrirModalAgenda() {
-            document.getElementById('modalAgenda').classList.add('active');
+        async function abrirModalAgenda() {
+            const modal = document.getElementById('modalAgenda');
+            if (!modal) {
+                console.error('❌ Modal de agenda no encontrado');
+                return;
+            }
+            
+            modal.classList.add('active');
             document.body.style.overflow = 'hidden';
+            
+            // Esperar un momento para que el DOM se actualice con el modal abierto
+            setTimeout(() => {
+                const calendarContainer = document.getElementById('calendarContainer');
+                if (!calendarContainer) {
+                    console.error('❌ calendarContainer no encontrado en el DOM');
+                    return;
+                }
+                
+                // Asegurar que el contenedor sea visible ANTES de renderizar
+                calendarContainer.style.display = 'block';
+                calendarContainer.style.visibility = 'visible';
+                calendarContainer.style.opacity = '1';
+                calendarContainer.style.height = 'auto';
+                calendarContainer.style.minHeight = '300px';
+                
+                console.log('📅 Contenedor del calendario preparado. Renderizando...');
+                
+                // Renderizar calendario inmediatamente - usar window para asegurar que esté disponible
+                if (typeof window.renderizarCalendario === 'function') {
+                    console.log('📅 Renderizando calendario al abrir modal...');
+                    try {
+                        window.renderizarCalendario();
+                    } catch (error) {
+                        console.error('❌ Error al renderizar calendario:', error);
+                    }
+                } else {
+                    console.error('❌ Función renderizarCalendario no está definida');
+                    console.log('Funciones disponibles en window:', Object.keys(window).filter(k => k.includes('render') || k.includes('cargar')));
+                }
+                
+                // Cargar citas desde Google Sheets y actualizar el calendario
+                if (typeof window.cargarCitasReservadas === 'function') {
+                    window.cargarCitasReservadas().then(() => {
+                        console.log('✅ Citas cargadas, actualizando calendario...');
+                        // Actualizar el calendario después de cargar las citas
+                        if (typeof window.renderizarCalendario === 'function') {
+                            window.renderizarCalendario();
+                        }
+                    }).catch(error => {
+                        console.error('❌ Error al cargar citas:', error);
+                        // Renderizar calendario de todas formas (sin citas)
+                        if (typeof window.renderizarCalendario === 'function') {
+                            window.renderizarCalendario();
+                        }
+                    });
+                } else {
+                    console.error('❌ Función cargarCitasReservadas no está definida');
+                    // Renderizar calendario de todas formas
+                    if (typeof window.renderizarCalendario === 'function') {
+                        window.renderizarCalendario();
+                    }
+                }
+            }, 200); // Delay para asegurar que el modal esté completamente visible y el DOM listo
         }
 
         function cerrarModalAgenda() {

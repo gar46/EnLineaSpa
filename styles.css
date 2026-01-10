@@ -362,81 +362,20 @@ body {
   display: inline-block;
 }
 
-.logo-wrapper::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: calc(100% + 12px);
-  height: calc(100% + 12px);
-  background: radial-gradient(circle, 
-    rgba(94, 221, 148, 0.25) 0%, 
-    rgba(166, 133, 201, 0.25) 30%, 
-    transparent 60%);
-  border-radius: 50%;
-  z-index: -1;
-  animation: neonGlow 5s ease-in-out infinite alternate;
-  filter: blur(6px);
-  opacity: 0.6;
-}
-
-.logo-wrapper::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: calc(100% + 18px);
-  height: calc(100% + 18px);
-  background: radial-gradient(circle, 
-    rgba(94, 221, 148, 0.2) 0%, 
-    rgba(166, 133, 201, 0.2) 25%, 
-    transparent 55%);
-  border-radius: 50%;
-  z-index: -2;
-  animation: neonGlowOuter 5s ease-in-out infinite alternate;
-  filter: blur(8px);
-  opacity: 0.4;
-}
-
 .logo-header-main {
-  max-height: 220px;
+  max-height: 286px;
   height: auto;
   width: auto;
-  max-width: 500px;
+  max-width: 650px;
   display: block;
   position: relative;
   background: transparent;
   padding: 0;
   border: none;
-  mix-blend-mode: darken;
-  filter: contrast(1.1) brightness(0.95);
   z-index: 2;
   object-fit: contain;
 }
 
-@keyframes neonGlow {
-  0% {
-    opacity: 0.55;
-    transform: translate(-50%, -50%) scale(1);
-  }
-  100% {
-    opacity: 0.65;
-    transform: translate(-50%, -50%) scale(1.01);
-  }
-}
-
-@keyframes neonGlowOuter {
-  0% {
-    opacity: 0.35;
-    transform: translate(-50%, -50%) scale(1);
-  }
-  100% {
-    opacity: 0.45;
-    transform: translate(-50%, -50%) scale(1.01);
-  }
-}
 
 .header-whatsapp {
   position: absolute;
@@ -552,17 +491,15 @@ body {
 }
 
 .modal-logo {
-  max-height: 180px;
+  max-height: 234px;
   height: auto;
   width: auto;
-  max-width: 400px;
+  max-width: 520px;
   display: block;
   position: relative;
   background: transparent;
   padding: 0;
   border: none;
-  mix-blend-mode: darken;
-  filter: contrast(1.1) brightness(0.95);
   z-index: 2;
   object-fit: contain;
 }
@@ -741,6 +678,11 @@ body {
   padding: 1.2rem;
   border-radius: 15px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  display: block !important; /* Asegurar que el calendario sea visible */
+  visibility: visible !important;
+  opacity: 1 !important;
+  min-height: 300px;
+  width: 100%;
 }
 
 .calendar-header {
@@ -1412,17 +1354,15 @@ body {
 }
 
 .footer-logo {
-  max-height: 220px;
+  max-height: 286px;
   height: auto;
   width: auto;
-  max-width: 500px;
+  max-width: 650px;
   display: block;
   position: relative;
   background: transparent;
   padding: 0;
   border: none;
-  mix-blend-mode: darken;
-  filter: contrast(1.1) brightness(0.95);
   z-index: 2;
   object-fit: contain;
 }
@@ -1465,8 +1405,8 @@ body {
   }
 
   .logo-header-main {
-    max-height: 150px;
-    max-width: 350px;
+    max-height: 195px;
+    max-width: 455px;
   }
 
   .header-content {
@@ -1474,17 +1414,17 @@ body {
   }
 
   .modal-logo {
-    max-height: 140px;
-    max-width: 320px;
+    max-height: 182px;
+    max-width: 416px;
   }
 
   .slider-container {
-    margin-top: 180px;
+    margin-top: 240px;
   }
 
   .footer-logo {
-    max-height: 150px;
-    max-width: 350px;
+    max-height: 195px;
+    max-width: 455px;
   }
 
   .contact-title {
@@ -1625,18 +1565,18 @@ body {
   }
 
   .logo-header-main {
-    max-height: 100px;
-    max-width: 250px;
+    max-height: 130px;
+    max-width: 325px;
   }
 
   .modal-logo {
-    max-height: 100px;
-    max-width: 250px;
+    max-height: 130px;
+    max-width: 325px;
   }
 
   .footer-logo {
-    max-height: 100px;
-    max-width: 250px;
+    max-height: 130px;
+    max-width: 325px;
   }
 
   .wspp-float {

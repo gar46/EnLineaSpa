@@ -80,16 +80,26 @@ function doPost(e) {
       }
       
       // Preparar la fila con los datos de la cita
+      // Asegurar que la fecha esté en formato correcto para Google Sheets
+      let fechaCitaFormateada = data.fecha || '';
+      if (fechaCitaFormateada) {
+        // Si la fecha viene en formato YYYY-MM-DD, mantenerla así
+        // Google Sheets la reconocerá automáticamente como fecha
+        fechaCitaFormateada = fechaCitaFormateada.toString().trim();
+      }
+      
       row = [
         data.fechaRegistro || new Date().toLocaleString('es-ES'),
         data.nombre || '',
         data.correo || '',
         data.celular || '',
-        data.fecha || '',
-        data.hora || '',
+        fechaCitaFormateada,
+        (data.hora || '').toString().trim(),
         data.servicio || '',
         data.mensaje || ''
       ];
+      
+      Logger.log('Agregando cita: ' + JSON.stringify(row));
     } else {
       // Hoja de Registros (descuentos)
       sheet = spreadsheet.getSheetByName('Registros');
@@ -119,9 +129,9 @@ function doPost(e) {
     // Agregar la fila a la hoja
     sheet.appendRow(row);
     
-    // Enviar email de confirmación
+    // Enviar email de confirmación ANTES de retornar respuesta
     try {
-      if (data.tipo === 'registro' && data.correo && data.correo.trim() !== '') {
+      if (data.tipo === 'registro' && data.correo && data.correo.trim() !== '' && data.correo.includes('@')) {
         const emailBody = `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f5f5f5;">
             <div style="background-color: #B19CD9; padding: 20px; text-align: center; border-radius: 10px 10px 0 0;">
@@ -147,10 +157,10 @@ function doPost(e) {
           htmlBody: emailBody
         });
         
-        Logger.log('Email de registro enviado a: ' + data.correo);
+        Logger.log('Email de registro enviado exitosamente a: ' + data.correo);
       }
       
-      if (data.tipo === 'agenda' && data.correo && data.correo.trim() !== '') {
+      if (data.tipo === 'agenda' && data.correo && data.correo.trim() !== '' && data.correo.includes('@')) {
         const emailBody = `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f5f5f5;">
             <div style="background-color: #B19CD9; padding: 20px; text-align: center; border-radius: 10px 10px 0 0;">
@@ -179,12 +189,12 @@ function doPost(e) {
           htmlBody: emailBody
         });
         
-        Logger.log('Email de cita enviado a: ' + data.correo);
+        Logger.log('Email de cita enviado exitosamente a: ' + data.correo);
       }
     } catch (emailError) {
       Logger.log('Error al enviar email: ' + emailError.toString());
-      Logger.log('Stack trace: ' + emailError.stack);
-      // No fallar si el email no se envía, pero registrar el error
+      Logger.log('Stack trace: ' + (emailError.stack || 'N/A'));
+      // Continuar aunque haya error en el email, no fallar la operación completa
     }
     
     // Retornar respuesta exitosa
@@ -216,9 +226,6 @@ function doGet(e) {
   try {
     const action = e.parameter.action;
     
-    // Crear respuesta con headers CORS
-    const output = ContentService.createTextOutput();
-    
     if (action === 'getCitas') {
       const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
       const sheet = spreadsheet.getSheetByName('Citas');
@@ -228,42 +235,124 @@ function doGet(e) {
       if (sheet) {
         const datos = sheet.getDataRange().getValues();
         
+        Logger.log('Total de filas en la hoja: ' + datos.length);
+        
         // Empezar desde la fila 2 (la fila 1 son encabezados)
         for (let i = 1; i < datos.length; i++) {
-          if (datos[i][4] && datos[i][5]) { // Fecha y Hora
-            citas.push({
-              fecha: datos[i][4],
-              hora: datos[i][5],
-              servicio: datos[i][6] || '',
-              nombre: datos[i][1] || ''
-            });
+          const fechaCita = datos[i][4]; // Columna E (índice 4) = Fecha Cita
+          const horaCita = datos[i][5]; // Columna F (índice 5) = Hora
+          
+          Logger.log('Fila ' + (i+1) + ' - Fecha: ' + fechaCita + ', Hora: ' + horaCita + ', Tipo hora: ' + typeof horaCita);
+          
+          if (fechaCita && horaCita) {
+            // Convertir fecha a formato YYYY-MM-DD si es Date object
+            let fechaFormateada;
+            if (fechaCita instanceof Date) {
+              const year = fechaCita.getFullYear();
+              const month = String(fechaCita.getMonth() + 1).padStart(2, '0');
+              const day = String(fechaCita.getDate()).padStart(2, '0');
+              fechaFormateada = `${year}-${month}-${day}`;
+            } else {
+              // Si es string, intentar convertir
+              try {
+                const fechaStr = fechaCita.toString().trim();
+                // Si ya está en formato YYYY-MM-DD, usarlo directamente
+                if (/^\d{4}-\d{2}-\d{2}$/.test(fechaStr)) {
+                  fechaFormateada = fechaStr;
+                } else {
+                  const fechaObj = new Date(fechaCita);
+                  if (!isNaN(fechaObj.getTime())) {
+                    const year = fechaObj.getFullYear();
+                    const month = String(fechaObj.getMonth() + 1).padStart(2, '0');
+                    const day = String(fechaObj.getDate()).padStart(2, '0');
+                    fechaFormateada = `${year}-${month}-${day}`;
+                  } else {
+                    fechaFormateada = fechaStr;
+                  }
+                }
+              } catch (e) {
+                fechaFormateada = fechaCita.toString().trim();
+              }
+            }
+            
+            // Normalizar hora - asegurar que sea solo hora (HH:MM), no fecha/hora
+            let horaFormateada = '';
+            if (horaCita instanceof Date) {
+              // Si es Date object, extraer solo la hora
+              const hours = String(horaCita.getHours()).padStart(2, '0');
+              const minutes = String(horaCita.getMinutes()).padStart(2, '0');
+              horaFormateada = `${hours}:${minutes}`;
+            } else {
+              // Si es string, limpiarlo y asegurar formato HH:MM
+              const horaStr = horaCita.toString().trim();
+              // Si tiene formato de fecha/hora, extraer solo la hora
+              if (horaStr.includes('T') || horaStr.includes(':')) {
+                // Intentar extraer solo la parte de la hora
+                const match = horaStr.match(/(\d{1,2}):(\d{2})/);
+                if (match) {
+                  const h = String(parseInt(match[1])).padStart(2, '0');
+                  const m = String(parseInt(match[2])).padStart(2, '0');
+                  horaFormateada = `${h}:${m}`;
+                } else {
+                  horaFormateada = horaStr.substring(0, 5); // Tomar primeros 5 caracteres (HH:MM)
+                }
+              } else {
+                horaFormateada = horaStr;
+              }
+            }
+            
+            // Solo agregar si la hora está en formato válido (HH:MM)
+            if (/^\d{2}:\d{2}$/.test(horaFormateada)) {
+              citas.push({
+                fecha: fechaFormateada,
+                hora: horaFormateada,
+                servicio: datos[i][6] || '',
+                nombre: datos[i][1] || ''
+              });
+              Logger.log('✅ Cita agregada: ' + fechaFormateada + ' a las ' + horaFormateada);
+            } else {
+              Logger.log('⚠️ Hora no válida, omitiendo cita: ' + horaFormateada + ' (original: ' + horaCita + ')');
+            }
           }
         }
+        
+        Logger.log('Citas obtenidas: ' + citas.length);
+        if (citas.length > 0) {
+          Logger.log('Primera cita: ' + JSON.stringify(citas[0]));
+        }
+      } else {
+        Logger.log('La hoja "Citas" no existe todavía');
       }
       
-      const response = JSON.stringify({
+      const responseData = {
         'success': true,
         'citas': citas
-      });
+      };
       
-      output.setContent(response);
-      output.setMimeType(ContentService.MimeType.JSON);
-      return output;
+      const responseJson = JSON.stringify(responseData);
+      Logger.log('Respuesta preparada, tamaño: ' + responseJson.length + ' caracteres');
+      Logger.log('Total de citas en respuesta: ' + citas.length);
+      
+      // Retornar JSON usando ContentService (maneja CORS automáticamente)
+      return ContentService.createTextOutput(responseJson)
+        .setMimeType(ContentService.MimeType.JSON);
     }
     
     // Respuesta por defecto
-    output.setContent('En Línea Spa - Google Apps Script funcionando correctamente');
-    output.setMimeType(ContentService.MimeType.TEXT);
-    return output;
+    return ContentService.createTextOutput('En Línea Spa - Google Apps Script funcionando correctamente')
+      .setMimeType(ContentService.MimeType.TEXT);
       
   } catch (error) {
-    const response = JSON.stringify({
+    Logger.log('Error en doGet: ' + error.toString());
+    Logger.log('Stack: ' + error.stack);
+    
+    const errorResponse = {
       'success': false,
       'error': error.toString(),
       'citas': []
-    });
-    const output = ContentService.createTextOutput(response);
-    output.setMimeType(ContentService.MimeType.JSON);
-    return output;
+    };
+    
+    return ContentService.createTextOutput(JSON.stringify(errorResponse))
+      .setMimeType(ContentService.MimeType.JSON);
   }
 }
