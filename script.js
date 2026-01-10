@@ -1,12 +1,15 @@
 // Configuración de Google Sheets
 // IMPORTANTE: Reemplaza esta URL con la URL de tu Google Apps Script Web App
+// IMPORTANTE: Esta debe ser la URL de tu aplicación web desplegada, NO de una biblioteca
+// La URL correcta debe terminar en /exec
+// Ejemplo: https://script.google.com/macros/s/AKfycbw.../exec
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwOrCX2G__g4Hj3gKjlMuTpgFE9WBiHVuHjj2s3g4mkUPpjbpEOYW7szDXJZ45LOga1/exec';
 
 // Función para enviar datos a Google Sheets
 async function enviarAGoogleSheets(datos) {
     try {
         // Si no hay URL configurada, solo guardar en localStorage
-        if (GOOGLE_SCRIPT_URL === 'TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUI') {
+        if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === 'TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUI') {
             return { success: true, localOnly: true };
         }
         
@@ -276,24 +279,32 @@ function normalizarFecha(fecha) {
 window.cargarCitasReservadas = async function cargarCitasReservadas() {
     try {
         // Primero intentar cargar desde Google Sheets
-        if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL !== 'TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUI') {
+        if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL !== 'TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUI' && GOOGLE_SCRIPT_URL.includes('/exec')) {
             try {
                 const url = `${GOOGLE_SCRIPT_URL}?action=getCitas`;
                 console.log('Cargando citas desde:', url);
                 
-                // Google Apps Script puede redirigir (302), necesitamos seguir la redirección
-                const response = await fetch(url, {
-                    method: 'GET',
-                    mode: 'cors',
-                    cache: 'no-cache',
-                    redirect: 'follow' // Seguir redirecciones automáticamente
-                });
-                
-                console.log('📥 Estado de respuesta:', response.status, response.statusText);
+                // Intentar primero con fetch normal
+                let response;
+                try {
+                    response = await fetch(url, {
+                        method: 'GET',
+                        mode: 'cors', // 'cors' permite CORS si el servidor lo permite
+                        cache: 'no-cache',
+                        redirect: 'follow', // Seguir redirecciones automáticamente
+                        credentials: 'omit' // No enviar cookies para evitar problemas de CORS
+                    });
+                    
+                    console.log('📥 Estado de respuesta:', response.status, response.statusText);
+                } catch (fetchInitError) {
+                    // Si fetch falla inmediatamente (error de CORS), usar método alternativo
+                    console.warn('⚠️ Error en fetch inicial, usando método alternativo:', fetchInitError.message);
+                    throw fetchInitError; // Re-lanzar para que se maneje en el catch externo
+                }
                 
                 // Google Apps Script puede devolver 302 (redirección) que fetch sigue automáticamente
                 // La respuesta final debería ser 200 OK después de seguir la redirección
-                if (response.ok || response.status === 200 || response.status === 302) {
+                if (response && (response.ok || response.status === 200 || response.status === 302)) {
                     let responseText = '';
                     try {
                         responseText = await response.text();
@@ -358,8 +369,29 @@ window.cargarCitasReservadas = async function cargarCitasReservadas() {
                     console.log('Respuesta:', text);
                 }
             } catch (fetchError) {
-                console.error('❌ Error al cargar citas desde Google Sheets:', fetchError);
-                console.error('Detalles del error:', fetchError.message, fetchError.stack);
+                // Verificar si es un error de CORS específicamente
+                const isCORSError = fetchError.message && (
+                    fetchError.message.includes('CORS') || 
+                    fetchError.message.includes('Failed to fetch') ||
+                    fetchError.message.includes('NetworkError')
+                );
+                
+                if (isCORSError) {
+                    console.warn('⚠️ Error de CORS al cargar citas desde Google Sheets.');
+                    console.warn('💡 Solución: Re-despliega la aplicación web de Google Apps Script con permisos "Cualquiera" tiene acceso.');
+                    console.warn('📋 Instrucciones:');
+                    console.warn('   1. Ve a script.google.com');
+                    console.warn('   2. Abre tu proyecto de Apps Script');
+                    console.warn('   3. Haz clic en "Desplegar" > "Administrar implementaciones"');
+                    console.warn('   4. Crea una "Nueva implementación" o edita la existente');
+                    console.warn('   5. Configura: "Quién tiene acceso" = "Cualquiera"');
+                    console.warn('   6. Guarda y actualiza la URL si cambió');
+                    console.warn('');
+                    console.warn('📦 Mientras tanto, se están usando las citas de localStorage como respaldo.');
+                } else {
+                    console.error('❌ Error al cargar citas desde Google Sheets:', fetchError);
+                    console.error('Detalles del error:', fetchError.message, fetchError.stack);
+                }
                 // Continuar para cargar desde localStorage como respaldo
             }
         } else {
