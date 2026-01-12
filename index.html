@@ -11,51 +11,38 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Playfair+Display:wght@300;400;500;600;700;800;900&family=Montserrat:wght@200;300;400;500;600&family=Advent+Pro:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Slider Fullscreen -->
-    <div class="slider-container">
-        <!-- Burbujas fijas con efecto bokeh -->
-        <div class="bokeh-bubbles">
-            <div class="bokeh-bubble bubble-1"></div>
-            <div class="bokeh-bubble bubble-2"></div>
-            <div class="bokeh-bubble bubble-3"></div>
-            <div class="bokeh-bubble bubble-4"></div>
-            <div class="bokeh-bubble bubble-5"></div>
-            <div class="bokeh-bubble bubble-6"></div>
-            <div class="bokeh-bubble bubble-7"></div>
-            <div class="bokeh-bubble bubble-8"></div>
-            <div class="bokeh-bubble bubble-9"></div>
-            <div class="bokeh-bubble bubble-10"></div>
-            <div class="bokeh-bubble bubble-11"></div>
-            <div class="bokeh-bubble bubble-12"></div>
+    <!-- Header flotante -->
+    <header class="floating-header">
+        <!-- Palabras flotantes con efecto de viento -->
+        <div class="floating-words-container">
+            <div class="floating-word word-1">- Acné</div>
+            <div class="floating-word word-2">- Manchas</div>
+            <div class="floating-word word-3">+ Tonificación</div>
+            <div class="floating-word word-4">- Stress</div>
+            <div class="floating-word word-5">+ Amor Propio</div>
+            <div class="floating-word word-6">+ Curvas</div>
         </div>
-        
-        <div class="slider-wrapper">
-            <!-- Slide 1 - Banner 1: Link a descuento -->
-            <a href="#" class="slide active" data-slide="1" onclick="event.preventDefault(); abrirModalDescuento();">
-                <img src="images/banner1.png" alt="Banner 1" class="slide-image" loading="eager">
-            </a>
-            
-            <!-- Slide 2 - Banner 2: Link a agenda -->
-            <a href="#" class="slide" data-slide="2" onclick="event.preventDefault(); abrirModalAgenda();">
-                <img src="images/banner2.png" alt="Banner 2" class="slide-image" loading="lazy">
-            </a>
-            
-            <!-- Slide 3 - Banner 3: Link a agenda -->
-            <a href="#" class="slide" data-slide="3" onclick="event.preventDefault(); abrirModalAgenda();">
-                <img src="images/banner3.png" alt="Banner 3" class="slide-image" loading="lazy">
+        <div class="header-content">
+            <div class="logo-wrapper">
+                <img src="330. En línea SPA/JPG Y PNG/PNG_Mesa de trabajo 1.png" alt="En Línea Spa" class="logo-header-main">
+            </div>
+            <a href="https://wa.me/573116319294?text=Hola,%20me%20gustaría%20solicitar%20información%20sobre%20sus%20servicios" 
+               class="header-whatsapp" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               aria-label="Contactar por WhatsApp">
+                <svg class="whatsapp-icon-small" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                </svg>
             </a>
         </div>
-        
-        <!-- Indicadores del slider -->
-        <div class="slider-indicators">
-            <span class="indicator active" data-slide="1"></span>
-            <span class="indicator" data-slide="2"></span>
-            <span class="indicator" data-slide="3"></span>
-        </div>
-        
-        <!-- Botones de navegación -->
-        <button class="slider-nav prev" onclick="changeSlide(-1)">‹</button>
-        <button class="slider-nav next" onclick="changeSlide(1)">›</button>
+    </header>
+
+    <!-- Rotador de Imágenes -->
+    <div class="image-rotator">
+        <a href="#" id="rotatingImageLink" onclick="event.preventDefault(); handleBannerClick();">
+            <img id="rotatingImage" src="images/banner1.png" alt="Promo" />
+        </a>
     </div>
 
     <!-- Sección de Reserva -->
@@ -252,33 +239,6 @@
         </div>
     </section>
 
-    <!-- Header flotante -->
-    <header class="floating-header">
-        <!-- Palabras flotantes con efecto de viento -->
-        <div class="floating-words-container">
-            <div class="floating-word word-1">- Acné</div>
-            <div class="floating-word word-2">- Manchas</div>
-            <div class="floating-word word-3">+ Tonificación</div>
-            <div class="floating-word word-4">- Stress</div>
-            <div class="floating-word word-5">+ Amor Propio</div>
-            <div class="floating-word word-6">+ Curvas</div>
-        </div>
-        <div class="header-content">
-            <div class="logo-wrapper">
-                <img src="330. En línea SPA/JPG Y PNG/PNG_Mesa de trabajo 1.png" alt="En Línea Spa" class="logo-header-main">
-            </div>
-            <a href="https://wa.me/573116319294?text=Hola,%20me%20gustaría%20solicitar%20información%20sobre%20sus%20servicios" 
-               class="header-whatsapp" 
-               target="_blank" 
-               rel="noopener noreferrer" 
-               aria-label="Contactar por WhatsApp">
-                <svg class="whatsapp-icon-small" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-                </svg>
-            </a>
-        </div>
-    </header>
-
     <!-- Modal de Descuento -->
     <div id="modalDescuento" class="modal-overlay">
         <div class="modal-container">
@@ -394,43 +354,36 @@
 
     <script src="script.js"></script>
     <script>
-        // Slider functionality
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-        const indicators = document.querySelectorAll('.indicator');
-        const totalSlides = slides.length;
+        // Rotador de imágenes simple
+        const images = [
+            "images/banner1.png",
+            "images/banner2.png",
+            "images/banner3.png"
+        ];
+        
+        const imageLinks = [
+            () => abrirModalDescuento(),  // banner1 -> descuento
+            () => abrirModalAgenda(),      // banner2 -> agenda
+            () => abrirModalAgenda()       // banner3 -> agenda
+        ];
 
-        function showSlide(index) {
-            slides.forEach(slide => slide.classList.remove('active'));
-            indicators.forEach(indicator => indicator.classList.remove('active'));
-            
-            if (index >= totalSlides) {
-                currentSlide = 0;
-            } else if (index < 0) {
-                currentSlide = totalSlides - 1;
-            } else {
-                currentSlide = index;
+        let currentImageIndex = 0;
+        const img = document.getElementById("rotatingImage");
+
+        // Función global para manejar el click según el banner actual
+        window.handleBannerClick = function() {
+            if (imageLinks[currentImageIndex]) {
+                imageLinks[currentImageIndex]();
             }
-            
-            slides[currentSlide].classList.add('active');
-            indicators[currentSlide].classList.add('active');
+        };
+
+        // Rotación automática cada 6 segundos (6000ms)
+        if (img) {
+            setInterval(() => {
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+                img.src = images[currentImageIndex];
+            }, 6000);
         }
-
-        function changeSlide(direction) {
-            showSlide(currentSlide + direction);
-        }
-
-        // Auto-play slider
-        setInterval(() => {
-            changeSlide(1);
-        }, 5000);
-
-        // Click en indicadores
-        indicators.forEach((indicator, index) => {
-            indicator.addEventListener('click', () => {
-                showSlide(index);
-            });
-        });
 
         // Funciones de modales
         function abrirModalDescuento() {
