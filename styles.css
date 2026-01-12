@@ -46,16 +46,26 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 270px);
+  min-height: 500px;
   overflow: hidden;
   z-index: 1;
-  margin-top: 240px;
+  margin-top: 270px;
+  margin-bottom: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }
 
 .slider-wrapper {
   position: relative;
   width: 100%;
   height: 100%;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  display: block;
 }
 
 .slide {
@@ -67,9 +77,12 @@ body {
   opacity: 0;
   transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
   transform: scale(1.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 .slide.active {
@@ -78,16 +91,14 @@ body {
   z-index: 2;
 }
 
-.slide[data-slide="1"] {
-  background: linear-gradient(135deg, #5edd94 0%, #7fe8b0 30%, #c3a3e6 70%, #e1bee7 100%);
-}
-
-.slide[data-slide="2"] {
-  background: linear-gradient(135deg, #c3a3e6 0%, #a685c9 30%, #7fe8b0 70%, #5edd94 100%);
-}
-
-.slide[data-slide="3"] {
-  background: linear-gradient(135deg, #7fe8b0 0%, #5edd94 30%, #a685c9 70%, #c3a3e6 100%);
+.slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  margin: 0;
+  padding: 0;
 }
 
 /* BURBUJAS BOKEH FIJAS */
@@ -304,9 +315,9 @@ body {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--purple-dark);
   backdrop-filter: blur(10px);
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid var(--purple-dark);
   color: var(--white);
   width: 50px;
   height: 50px;
@@ -322,8 +333,8 @@ body {
 }
 
 .slider-nav:hover {
-  background: rgba(255, 255, 255, 0.3);
-  border-color: rgba(255, 255, 255, 0.5);
+  background: var(--purple);
+  border-color: var(--purple);
   transform: translateY(-50%) scale(1.1);
 }
 
@@ -341,7 +352,7 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  padding: 20px;
+  padding: 5px 20px;
   z-index: 2000;
   background: var(--white);
   backdrop-filter: blur(15px);
@@ -789,10 +800,10 @@ body {
 }
 
 .logo-header-main {
-  max-height: 286px;
+  max-height: 260px;
   height: auto;
   width: auto;
-  max-width: 650px;
+  max-width: 845px;
   display: block;
   position: relative;
   background: transparent;
@@ -1281,6 +1292,9 @@ body {
   width: 100%;
   min-height: 70vh;
   padding: 4rem 2rem;
+  padding-top: 0;
+  margin-top: 0;
+  margin-bottom: 0;
   text-align: center;
   display: flex;
   align-items: center;
@@ -1288,6 +1302,7 @@ body {
   background: linear-gradient(135deg, #5edd94 0%, #7fe8b0 30%, #c3a3e6 70%, #e1bee7 100%);
   overflow: hidden;
   z-index: 100;
+  border-top: none;
 }
 
 .reserva-bubbles {
@@ -1849,8 +1864,8 @@ body {
   }
 
   .logo-header-main {
-    max-height: 195px;
-    max-width: 455px;
+    max-height: 178px;
+    max-width: 592px;
   }
 
   .header-content {
@@ -1863,7 +1878,27 @@ body {
   }
 
   .slider-container {
-    margin-top: 240px;
+    margin-top: 200px;
+    width: 100%;
+    height: calc(100vh - 200px);
+    min-height: 500px;
+  }
+  
+  .slider-wrapper {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .slide {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .slide-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
   }
 
   .footer-logo {
@@ -2010,8 +2045,52 @@ body {
   }
 
   .logo-header-main {
-    max-height: 130px;
-    max-width: 325px;
+    max-height: 118px;
+    max-width: 423px;
+  }
+  
+  .slider-container {
+    margin-top: 142px;
+    margin-bottom: 0;
+    height: calc(100vh - 142px);
+    min-height: 400px;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  .slider-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .slide {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  .slide-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .reserva-section {
+    margin-top: 0;
+    padding-top: 0;
   }
 
   .modal-logo {
@@ -2551,6 +2630,8 @@ body {
   .reserva-section {
     min-height: 60vh;
     padding: 3rem 1.5rem;
+    padding-top: 0;
+    margin-top: 0;
   }
 
   .contact-content {

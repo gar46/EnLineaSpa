@@ -30,32 +30,20 @@
         </div>
         
         <div class="slider-wrapper">
-            <!-- Slide 1 -->
-            <div class="slide active" data-slide="1">
-                <div class="slide-content">
-                    <h1 class="slide-title">Resalta tu belleza natural</h1>
-                    <p class="slide-subtitle">Limpiezas faciales & rejuvenecimiento</p>
-                    <button class="btn-slide" onclick="abrirModalAgenda()">Reservar ahora</button>
-                </div>
-            </div>
+            <!-- Slide 1 - Banner 1: Link a descuento -->
+            <a href="#" class="slide active" data-slide="1" onclick="event.preventDefault(); abrirModalDescuento();">
+                <img src="images/banner1.png" alt="Banner 1" class="slide-image">
+            </a>
             
-            <!-- Slide 2 -->
-            <div class="slide" data-slide="2">
-                <div class="slide-content">
-                    <h1 class="slide-title">Relajación que transforma</h1>
-                    <p class="slide-subtitle">Masajes reductores & bienestar</p>
-                    <button class="btn-slide" onclick="abrirModalAgenda()">Agendar cita</button>
-                </div>
-            </div>
+            <!-- Slide 2 - Banner 2: Link a agenda -->
+            <a href="#" class="slide" data-slide="2" onclick="event.preventDefault(); abrirModalAgenda();">
+                <img src="images/banner2.png" alt="Banner 2" class="slide-image">
+            </a>
             
-            <!-- Slide 3 -->
-            <div class="slide" data-slide="3">
-                <div class="slide-content">
-                    <h1 class="slide-title">Resultados que se sienten</h1>
-                    <p class="slide-subtitle">Tonificación y levantamiento</p>
-                    <button class="btn-slide" onclick="abrirModalDescuento()">Quiero mi descuento</button>
-                </div>
-            </div>
+            <!-- Slide 3 - Banner 3: Link a agenda -->
+            <a href="#" class="slide" data-slide="3" onclick="event.preventDefault(); abrirModalAgenda();">
+                <img src="images/banner3.png" alt="Banner 3" class="slide-image">
+            </a>
         </div>
         
         <!-- Indicadores del slider -->
@@ -93,8 +81,8 @@
             <div class="reserva-bubble rb-8"></div>
         </div>
         <div class="reserva-content">
-            <h1 class="reserva-title">Resalta tu belleza natural</h1>
-            <p class="reserva-subtitle">Limpiezas faciales & rejuvenecimiento</p>
+            <h1 class="reserva-title">¿Tu piel y tu cuerpo aún sienten los excesos de Navidad?</h1>
+            <p class="reserva-subtitle">Es momento de renovarte.</p>
             <button class="btn-reserva" onclick="abrirModalAgenda()">Reservar ahora</button>
         </div>
         <div class="reserva-wave"></div>
