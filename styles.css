@@ -17,14 +17,40 @@
   box-sizing: border-box;
 }
 
+/* Mobile-first: Reset base */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+html {
+  width: 100%;
+}
+
 body {
   font-family: 'Cormorant Garamond', 'Playfair Display', serif;
   color: var(--white);
-  overflow-x: hidden;
   min-height: 100vh;
+  width: 100%;
+  font-weight: 300;
+}
+
+/* Header sticky */
+header {
+  position: sticky;
+  top: 0;
+}
+
+/* Secciones sin espacios */
+.section, .banner, .slider-container, .image-rotator, .reserva-section {
   margin: 0;
   padding: 0;
-  font-weight: 300;
+}
+
+/* Imágenes como bloque */
+img {
+  display: block;
 }
 
 /* Fuente Ador Hairline Medium para agenda */
@@ -40,70 +66,39 @@ body {
   letter-spacing: 0.5px;
 }
 
-/* SLIDER FULLSCREEN */
-.slider-container {
-  position: relative;
-  top: 0;
-  left: 0;
+/* ROTADOR DE IMÁGENES */
+.image-rotator {
   width: 100%;
-  height: calc(100vh - 270px);
-  min-height: 500px;
-  overflow: hidden;
-  z-index: 1;
-  margin-top: 270px;
-  margin-bottom: 0;
-  padding: 0;
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  box-sizing: border-box;
-}
-
-.slider-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  background: transparent;
-  display: block;
-}
-
-.slide {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
-  transform: scale(1.1);
-  display: block;
-  text-decoration: none;
-  cursor: pointer;
+  max-width: 100%;
   overflow: hidden;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  position: relative;
+  display: block;
 }
 
-.slide.active {
-  opacity: 1;
-  transform: scale(1);
-  z-index: 2;
-}
-
-.slide-image {
+.image-rotator img {
   width: 100%;
-  height: 100%;
+  height: auto;
+  display: block;
   object-fit: cover;
   object-position: center;
-  display: block;
   margin: 0;
   padding: 0;
   vertical-align: top;
+}
+
+.image-rotator a {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
   line-height: 0;
 }
+
+/* Estilos del slider eliminados - ahora usamos .image-rotator */
 
 /* BURBUJAS BOKEH FIJAS */
 .bokeh-bubbles {
@@ -352,7 +347,7 @@ body {
 
 /* HEADER FLOTANTE */
 .floating-header {
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   width: 100%;
@@ -363,6 +358,7 @@ body {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   overflow: hidden;
+  margin: 0;
 }
 
 .header-content {
@@ -372,6 +368,8 @@ body {
   position: relative;
   max-width: 100%;
   z-index: 2;
+  margin: 0;
+  padding: 0;
 }
 
 /* EFECTO DE HOJAS FLOTANTES EN EL HEADER */
@@ -1840,6 +1838,15 @@ body {
 
 /* RESPONSIVE - MOBILE FIRST */
 @media (max-width: 768px) {
+  .image-rotator img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  .floating-header {
+    padding: 8px 15px;
+  }
   .slide-title {
     font-size: 2.2rem;
   }
@@ -1882,28 +1889,30 @@ body {
   }
 
   .slider-container {
-    margin-top: 200px;
-    margin-bottom: 0;
+    margin: 0;
+    display: block;
     width: 100%;
-    height: calc(100vh - 200px);
-    min-height: 500px;
-    padding: 0;
-    overflow: hidden;
+    position: relative;
   }
   
   .slider-wrapper {
     width: 100%;
-    height: 100%;
     margin: 0;
     padding: 0;
+    min-height: 300px;
   }
-  
+
   .slide {
     width: 100%;
-    height: 100%;
     margin: 0;
     padding: 0;
     overflow: hidden;
+  }
+  
+  .slide-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
   }
   
   .slide-image {
@@ -2029,6 +2038,7 @@ body {
   }
 }
 
+/* MOBILE FIRST - Sobrescribir TODOS los estilos base */
 @media (max-width: 480px) {
   .slide-title {
     font-size: 1.8rem;
@@ -2060,68 +2070,67 @@ body {
   }
 
   .floating-header {
-    padding: 12px 15px;
+    padding: 5px 10px !important;
+    margin: 0 !important;
+    margin-bottom: 0 !important;
+    border-bottom: none;
+    position: sticky !important;
+    top: 0 !important;
   }
 
   .logo-header-main {
-    max-height: 118px;
-    max-width: 423px;
-  }
-  
-  .slider-container {
-    margin-top: 142px;
-    margin-bottom: 0;
-    height: calc(100vh - 142px);
-    min-height: 50vh;
-    max-height: calc(100vh - 142px);
-    width: 100%;
-    padding: 0;
-    overflow: hidden;
-    position: relative;
-  }
-  
-  .slider-wrapper {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    margin: 0;
-    padding: 0;
-    display: block;
-  }
-  
-  .slide {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    display: block;
-  }
-  
-  .slide-image {
-    width: 100%;
-    height: 100%;
-    min-width: 100%;
-    min-height: 100%;
-    object-fit: cover;
-    object-position: center;
+    max-height: 80px !important;
+    max-width: 280px !important;
+    height: auto !important;
+    width: auto !important;
     display: block;
     margin: 0;
-    padding: 0;
-    vertical-align: top;
-    line-height: 0;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
   }
   
+  .header-content {
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* SOLUCIÓN DEFINITIVA MOBILE: Sin espacios, ancho completo, fondo degradado */
+  
+  /* Slider container visible */
+  /* Burbujas bokeh - fondo, detrás de todo */
+  .bokeh-bubbles {
+    display: block !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 1 !important;
+    pointer-events: none;
+    overflow: visible;
+  }
+  
+  /* Rotador de imágenes en móvil */
+  .image-rotator {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+  }
+  
+  .image-rotator img {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    object-fit: cover !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* Sección reserva - sin espacios */
   .reserva-section {
-    margin-top: 0;
-    padding-top: 0;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    display: block;
   }
 
   .modal-logo {
