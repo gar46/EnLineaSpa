@@ -24,7 +24,7 @@
         </div>
         <div class="header-content">
             <div class="logo-wrapper">
-                <img src="330. En línea SPA/JPG Y PNG/PNG_Mesa de trabajo 1.png" alt="En Línea Spa" class="logo-header-main">
+                <img src="330. En línea SPA/JPG Y PNG/PNG_Mesa de trabajo 1 copia 6.png" alt="En Línea Spa" class="logo-header-main">
             </div>
             <a href="https://wa.me/573116319294?text=Hola,%20me%20gustaría%20solicitar%20información%20sobre%20sus%20servicios" 
                class="header-whatsapp" 
@@ -104,45 +104,235 @@
 
     <!-- Sección de Servicios -->
     <section class="services-section-main">
-        <div class="corner-bubbles">
-            <div class="corner-bubble corner-bubble-green corner-bubble-tl-1"></div>
-            <div class="corner-bubble corner-bubble-green corner-bubble-tl-2"></div>
-            <div class="corner-bubble corner-bubble-purple corner-bubble-tr-1"></div>
-            <div class="corner-bubble corner-bubble-purple corner-bubble-tr-2"></div>
-            <div class="corner-bubble corner-bubble-purple corner-bubble-bl-1"></div>
-            <div class="corner-bubble corner-bubble-purple corner-bubble-bl-2"></div>
-            <div class="corner-bubble corner-bubble-green corner-bubble-br-1"></div>
-            <div class="corner-bubble corner-bubble-green corner-bubble-br-2"></div>
-        </div>
-        <div class="section-bubbles">
-            <div class="section-bubble sb-1"></div>
-            <div class="section-bubble sb-2"></div>
-            <div class="section-bubble sb-3"></div>
-            <div class="section-bubble sb-4"></div>
-            <div class="section-bubble sb-5"></div>
-            <div class="section-bubble sb-6"></div>
-        </div>
-        <h2 class="services-title">Nuestros Servicios</h2>
-        <div class="services-list-container">
-            <div class="service-card">
-                <span class="service-icon">✨</span>
-                <span class="service-name">Limpiezas Faciales</span>
-            </div>
-            <div class="service-card">
-                <span class="service-icon">💆‍♀️</span>
-                <span class="service-name">Masajes Reductores</span>
-            </div>
-            <div class="service-card">
-                <span class="service-icon">🌿</span>
-                <span class="service-name">Tratamiento de Acné</span>
-            </div>
-            <div class="service-card">
-                <span class="service-icon">🌸</span>
-                <span class="service-name">Rejuvenecimiento Facial</span>
-            </div>
-            <div class="service-card">
-                <span class="service-icon">🍑</span>
-                <span class="service-name">Tonificación de Glúteos</span>
+        <div class="services-container">
+            <h2 class="services-accordion-title">Nuestros Servicios</h2>
+            
+            <div class="accordion">
+                <!-- Limpiezas Faciales -->
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="service-icon-wrapper">
+                            <svg class="service-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+                                <circle cx="12" cy="8" r="2"/>
+                                <path d="M8 16c0-2 2-4 4-4s4 2 4 4"/>
+                                <path d="M9 12h6M12 9v6"/>
+                            </svg>
+                        </div>
+                        <div class="service-header-content">
+                            <div class="service-name">Limpiezas Faciales</div>
+                            <div class="service-tagline">Purificación profunda y luminosidad</div>
+                        </div>
+                        <svg class="accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="content-inner">
+                            <video class="service-video" autoplay loop muted playsinline>
+                                <source src="img/videosenlinea/faciales/pagina3.mp4" type="video/mp4">
+                            </video>
+                            
+                            <p class="service-description">
+                                Tratamiento profundo de purificación que elimina impurezas, células muertas y puntos negros mediante técnicas avanzadas. Incluye extracción profesional, exfoliación enzimática y mascarilla personalizada según tu tipo de piel. Ideal para mantener el rostro luminoso, fresco y oxigenado.
+                            </p>
+
+                            <div class="service-benefits">
+                                <div class="benefits-title">Beneficios del tratamiento:</div>
+                                <ul class="benefits-list">
+                                    <li>Eliminación profunda de impurezas y comedones</li>
+                                    <li>Piel más luminosa y uniforme</li>
+                                    <li>Poros visiblemente reducidos</li>
+                                    <li>Mejora la absorción de productos</li>
+                                    <li>Efecto inmediato de frescura</li>
+                                </ul>
+                            </div>
+
+                            <button class="btn-agenda-service" onclick="abrirModalAgenda()">Agenda tu cita de valoración</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Masajes Reductores -->
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="service-icon-wrapper">
+                            <svg class="service-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2v20M2 12h20"/>
+                                <circle cx="8" cy="8" r="2" fill="currentColor"/>
+                                <circle cx="16" cy="16" r="2" fill="currentColor"/>
+                                <path d="M8 16l8-8"/>
+                            </svg>
+                        </div>
+                        <div class="service-header-content">
+                            <div class="service-name">Masajes Reductores</div>
+                            <div class="service-tagline">Moldea tu figura naturalmente</div>
+                        </div>
+                        <svg class="accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="content-inner">
+                            <video class="service-video" autoplay loop muted playsinline>
+                                <source src="img/videosenlinea/corporales/pagina18.mp4" type="video/mp4">
+                            </video>
+                            
+                            <p class="service-description">
+                                Técnica especializada que combina masaje linfático y maniobras reductoras para movilizar la grasa localizada y combatir la celulitis. Activa la circulación, tonifica tejidos y ayuda a modelar el contorno corporal. Resultados visibles desde las primeras sesiones con tratamiento continuo.
+                            </p>
+
+                            <div class="service-benefits">
+                                <div class="benefits-title">Beneficios del tratamiento:</div>
+                                <ul class="benefits-list">
+                                    <li>Reducción de medidas en zonas específicas</li>
+                                    <li>Mejora visible de la celulitis</li>
+                                    <li>Estimulación del sistema linfático</li>
+                                    <li>Piel más firme y tonificada</li>
+                                    <li>Mejora la circulación sanguínea</li>
+                                </ul>
+                            </div>
+
+                            <button class="btn-agenda-service" onclick="abrirModalAgenda()">Agenda tu cita de valoración</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tratamiento de Acné -->
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="service-icon-wrapper">
+                            <svg class="service-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <circle cx="8" cy="8" r="1.5" fill="currentColor"/>
+                                <circle cx="16" cy="8" r="1.5" fill="currentColor"/>
+                                <circle cx="8" cy="16" r="1.5" fill="currentColor"/>
+                                <circle cx="16" cy="16" r="1.5" fill="currentColor"/>
+                                <path d="M12 8v8"/>
+                            </svg>
+                        </div>
+                        <div class="service-header-content">
+                            <div class="service-name">Tratamiento de Acné</div>
+                            <div class="service-tagline">Piel sana y sin imperfecciones</div>
+                        </div>
+                        <svg class="accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="content-inner">
+                            <video class="service-video" autoplay loop muted playsinline>
+                                <source src="img/videosenlinea/faciales/pagina41.mp4" type="video/mp4">
+                            </video>
+                            
+                            <p class="service-description">
+                                Protocolo médico-estético diseñado para pieles con acné activo o secuelas. Incluye limpieza profunda, aplicación de principios activos desinflamatorios, terapia con luz LED y productos especializados que regulan la producción sebácea y previenen nuevos brotes.
+                            </p>
+
+                            <div class="service-benefits">
+                                <div class="benefits-title">Beneficios del tratamiento:</div>
+                                <ul class="benefits-list">
+                                    <li>Control efectivo del acné activo</li>
+                                    <li>Reducción de inflamación y enrojecimiento</li>
+                                    <li>Prevención de nuevos brotes</li>
+                                    <li>Mejora de cicatrices y manchas</li>
+                                    <li>Regulación de la producción de grasa</li>
+                                </ul>
+                            </div>
+
+                            <button class="btn-agenda-service" onclick="abrirModalAgenda()">Agenda tu cita de valoración</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rejuvenecimiento Facial -->
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="service-icon-wrapper">
+                            <svg class="service-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
+                                <circle cx="12" cy="12" r="4"/>
+                                <path d="M12 8v4l3 2"/>
+                            </svg>
+                        </div>
+                        <div class="service-header-content">
+                            <div class="service-name">Rejuvenecimiento Facial</div>
+                            <div class="service-tagline">Devuelve juventud a tu rostro</div>
+                        </div>
+                        <svg class="accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="content-inner">
+                            <video class="service-video" autoplay loop muted playsinline>
+                                <source src="img/videosenlinea/faciales/pagina5.mp4" type="video/mp4">
+                            </video>
+                            
+                            <p class="service-description">
+                                Tratamiento antiedad integral que combina tecnología avanzada con activos regeneradores de última generación. Estimula la producción natural de colágeno, atenúa líneas de expresión, unifica el tono y devuelve firmeza a la piel. Un ritual de belleza que revierte los signos del envejecimiento.
+                            </p>
+
+                            <div class="service-benefits">
+                                <div class="benefits-title">Beneficios del tratamiento:</div>
+                                <ul class="benefits-list">
+                                    <li>Reducción de líneas finas y arrugas</li>
+                                    <li>Mayor firmeza y elasticidad</li>
+                                    <li>Piel más luminosa y uniforme</li>
+                                    <li>Estimulación del colágeno natural</li>
+                                    <li>Hidratación profunda y duradera</li>
+                                </ul>
+                            </div>
+
+                            <button class="btn-agenda-service" onclick="abrirModalAgenda()">Agenda tu cita de valoración</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tonificación de Glúteos -->
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="service-icon-wrapper">
+                            <svg class="service-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2v20M2 12h20"/>
+                                <circle cx="12" cy="8" r="3"/>
+                                <path d="M6 16c0-2 3-4 6-4s6 2 6 4"/>
+                                <circle cx="12" cy="16" r="4"/>
+                            </svg>
+                        </div>
+                        <div class="service-header-content">
+                            <div class="service-name">Tonificación de Glúteos</div>
+                            <div class="service-tagline">Define y levanta tu figura</div>
+                        </div>
+                        <svg class="accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="content-inner">
+                            <video class="service-video" autoplay loop muted playsinline>
+                                <source src="img/videosenlinea/corporales/pagina19.mp4" type="video/mp4">
+                            </video>
+                            
+                            <p class="service-description">
+                                Programa especializado que combina electroestimulación muscular, masajes tonificantes y productos reafirmantes profesionales para levantar, moldear y dar firmeza a los glúteos. Mejora la textura de la piel, reduce flacidez y define el contorno. Resultados progresivos y duraderos con constancia.
+                            </p>
+
+                            <div class="service-benefits">
+                                <div class="benefits-title">Beneficios del tratamiento:</div>
+                                <ul class="benefits-list">
+                                    <li>Glúteos más firmes y levantados</li>
+                                    <li>Mejora del tono muscular</li>
+                                    <li>Reducción de flacidez</li>
+                                    <li>Piel más suave y tersa</li>
+                                    <li>Contorno corporal definido</li>
+                                </ul>
+                            </div>
+
+                            <button class="btn-agenda-service" onclick="abrirModalAgenda()">Agenda tu cita de valoración</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -383,6 +573,31 @@
                 currentImageIndex = (currentImageIndex + 1) % images.length;
                 img.src = images[currentImageIndex];
             }, 6000);
+        }
+
+        // Función del acordeón de servicios
+        function toggleAccordion(header) {
+            const item = header.parentElement;
+            const content = item.querySelector('.accordion-content');
+            const allHeaders = document.querySelectorAll('.accordion-header');
+            const allContents = document.querySelectorAll('.accordion-content');
+            
+            // Cerrar todos los demás acordeones
+            allHeaders.forEach(h => {
+                if (h !== header) {
+                    h.classList.remove('active');
+                }
+            });
+            
+            allContents.forEach(c => {
+                if (c !== content) {
+                    c.classList.remove('active');
+                }
+            });
+            
+            // Toggle del acordeón actual
+            header.classList.toggle('active');
+            content.classList.toggle('active');
         }
 
         // Funciones de modales
