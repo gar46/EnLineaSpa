@@ -38,12 +38,50 @@
         </div>
     </header>
 
-    <!-- Rotador de Imágenes -->
-    <div class="image-rotator">
-        <a href="#" id="rotatingImageLink" onclick="event.preventDefault(); handleBannerClick();">
-            <img id="rotatingImage" src="images/banner1.png" alt="Promo" />
-        </a>
-    </div>
+    <!-- Hero Slider -->
+    <section class="hero-slider" id="heroSlider" aria-roledescription="carousel" aria-label="Promociones de En Línea Spa">
+        <div class="hero-slides">
+            <div class="hero-slide is-active" data-action="descuento" role="group" aria-roledescription="slide" aria-label="1 de 3">
+                <img src="images/banner1.png" alt="¡Llegamos a San Pedro de los Milagros! 10% OFF para clientes nuevos" />
+            </div>
+            <div class="hero-slide" data-action="agenda" role="group" aria-roledescription="slide" aria-label="2 de 3">
+                <img src="images/banner2.png" alt="En el mes de las Madres, regala belleza" />
+            </div>
+            <div class="hero-slide" data-action="agenda" role="group" aria-roledescription="slide" aria-label="3 de 3">
+                <img src="images/banner3.png" alt="El frío envejece tu piel. Agenda tu cita de valoración" />
+            </div>
+        </div>
+
+        <div class="hero-sparkles" aria-hidden="true">
+            <span class="hero-sparkle hs-1"></span>
+            <span class="hero-sparkle hs-2"></span>
+            <span class="hero-sparkle hs-3"></span>
+            <span class="hero-sparkle hs-4"></span>
+            <span class="hero-sparkle hs-5"></span>
+            <span class="hero-sparkle hs-6"></span>
+        </div>
+
+        <button class="hero-nav hero-nav-prev" type="button" aria-label="Banner anterior">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M15 18 9 12l6-6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+        <button class="hero-nav hero-nav-next" type="button" aria-label="Banner siguiente">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M9 18l6-6-6-6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+
+        <div class="hero-dots" role="tablist" aria-label="Selector de banner">
+            <button class="hero-dot is-active" type="button" data-index="0" role="tab" aria-selected="true" aria-label="Banner 1"></button>
+            <button class="hero-dot" type="button" data-index="1" role="tab" aria-selected="false" aria-label="Banner 2"></button>
+            <button class="hero-dot" type="button" data-index="2" role="tab" aria-selected="false" aria-label="Banner 3"></button>
+        </div>
+
+        <div class="hero-progress" aria-hidden="true">
+            <span class="hero-progress-bar"></span>
+        </div>
+    </section>
 
     <!-- Sección de Reserva -->
     <section class="reserva-section">
@@ -544,36 +582,82 @@
 
     <script src="script.js"></script>
     <script>
-        // Rotador de imágenes simple
-        const images = [
-            "images/banner1.png",
-            "images/banner2.png",
-            "images/banner3.png"
-        ];
-        
-        const imageLinks = [
-            () => abrirModalDescuento(),  // banner1 -> descuento
-            () => abrirModalAgenda(),      // banner2 -> agenda
-            () => abrirModalAgenda()       // banner3 -> agenda
-        ];
+        // Hero Slider: transiciones fade, Ken Burns, dots, flechas y barra de progreso
+        (function() {
+            const slider = document.getElementById('heroSlider');
+            if (!slider) return;
 
-        let currentImageIndex = 0;
-        const img = document.getElementById("rotatingImage");
+            const slides = slider.querySelectorAll('.hero-slide');
+            const dots = slider.querySelectorAll('.hero-dot');
+            const prevBtn = slider.querySelector('.hero-nav-prev');
+            const nextBtn = slider.querySelector('.hero-nav-next');
+            const progressBar = slider.querySelector('.hero-progress-bar');
 
-        // Función global para manejar el click según el banner actual
-        window.handleBannerClick = function() {
-            if (imageLinks[currentImageIndex]) {
-                imageLinks[currentImageIndex]();
+            const INTERVAL = 6000;
+            let currentIndex = 0;
+            let timer = null;
+
+            const actions = {
+                descuento: () => (typeof abrirModalDescuento === 'function') && abrirModalDescuento(),
+                agenda:    () => (typeof abrirModalAgenda    === 'function') && abrirModalAgenda()
+            };
+
+            function goTo(index) {
+                index = (index + slides.length) % slides.length;
+                slides.forEach((s, i) => s.classList.toggle('is-active', i === index));
+                dots.forEach((d, i) => {
+                    d.classList.toggle('is-active', i === index);
+                    d.setAttribute('aria-selected', i === index ? 'true' : 'false');
+                });
+                currentIndex = index;
+                restartProgress();
             }
-        };
 
-        // Rotación automática cada 6 segundos (6000ms)
-        if (img) {
-            setInterval(() => {
-                currentImageIndex = (currentImageIndex + 1) % images.length;
-                img.src = images[currentImageIndex];
-            }, 6000);
-        }
+            function restartProgress() {
+                if (!progressBar) return;
+                progressBar.classList.remove('is-running');
+                // force reflow to restart the CSS animation
+                void progressBar.offsetWidth;
+                progressBar.classList.add('is-running');
+            }
+
+            function next() { goTo(currentIndex + 1); }
+            function prev() { goTo(currentIndex - 1); }
+
+            function startTimer() {
+                stopTimer();
+                timer = setInterval(next, INTERVAL);
+                if (progressBar) progressBar.classList.add('is-running');
+            }
+            function stopTimer() {
+                if (timer) { clearInterval(timer); timer = null; }
+                if (progressBar) progressBar.classList.remove('is-running');
+            }
+
+            slides.forEach((slide) => {
+                slide.addEventListener('click', () => {
+                    const action = slide.dataset.action;
+                    if (actions[action]) actions[action]();
+                });
+            });
+
+            dots.forEach((dot) => {
+                dot.addEventListener('click', () => {
+                    const idx = parseInt(dot.dataset.index, 10);
+                    goTo(idx);
+                    startTimer();
+                });
+            });
+
+            if (prevBtn) prevBtn.addEventListener('click', () => { prev(); startTimer(); });
+            if (nextBtn) nextBtn.addEventListener('click', () => { next(); startTimer(); });
+
+            slider.addEventListener('mouseenter', stopTimer);
+            slider.addEventListener('mouseleave', startTimer);
+
+            restartProgress();
+            startTimer();
+        })();
 
         // Función del acordeón de servicios
         function toggleAccordion(header) {
