@@ -2246,10 +2246,10 @@ img {
 }
 
 .footer-logo {
-  width: 100%;
+  width: auto;
   max-width: 100%;
   height: auto;
-  max-height: none;
+  max-height: 220px;
   display: block;
   position: relative;
   background: transparent;
@@ -2257,6 +2257,7 @@ img {
   border: none;
   z-index: 2;
   object-fit: contain;
+  margin: 0 auto;
 }
 
 .footer-copyright {
@@ -2285,18 +2286,18 @@ img {
   }
   
   .floating-header {
-    padding: 8px 15px;
+    padding: 4px 15px;
     min-height: auto;
   }
   .logo-header-main {
     width: auto !important;
-    max-width: 240px !important;
-    height: 85px !important;
-    max-height: 85px !important;
+    max-width: 380px !important;
+    height: 130px !important;
+    max-height: 130px !important;
     margin: 0 auto !important;
   }
   .header-content {
-    min-height: 85px;
+    min-height: 130px;
   }
   .slide-title {
     font-size: 2.2rem;
@@ -2376,9 +2377,10 @@ img {
   }
 
   .footer-logo {
-    width: 100%;
+    width: auto;
     max-width: 100%;
-    max-height: none;
+    max-height: 180px;
+    margin: 0 auto;
   }
 
   .contact-title {
@@ -2541,7 +2543,7 @@ img {
   }
 
   .floating-header {
-    padding: 6px 10px !important;
+    padding: 2px 10px !important;
     margin: 0 !important;
     margin-bottom: 0 !important;
     border-bottom: none;
@@ -2551,9 +2553,9 @@ img {
 
   .logo-header-main {
     width: auto !important;
-    max-width: 200px !important;
-    height: 70px !important;
-    max-height: 70px !important;
+    max-width: 320px !important;
+    height: 110px !important;
+    max-height: 110px !important;
     display: block;
     margin: 0 auto;
   }
@@ -2561,7 +2563,7 @@ img {
   .header-content {
     padding: 0;
     margin: 0;
-    min-height: 70px;
+    min-height: 110px;
   }
   
   /* SOLUCIÓN DEFINITIVA MOBILE: Sin espacios, ancho completo, fondo degradado */
@@ -2611,9 +2613,10 @@ img {
   }
 
   .footer-logo {
-    width: 100%;
+    width: auto;
     max-width: 100%;
-    max-height: none;
+    max-height: 150px;
+    margin: 0 auto;
   }
 
   .wspp-float {
