@@ -117,9 +117,19 @@ img {
 .hero-slides {
   position: relative;
   width: 100%;
-  /* Aspect-ratio basado en las dimensiones reales de los banners 1412x690 */
-  aspect-ratio: 1412 / 690;
+  /* Fallback aspect-ratio con padding-bottom (compat. con navegadores móviles antiguos). 
+     690/1412 = 48.866% */
+  padding-bottom: 48.866%;
   background: #f5efe9;
+  touch-action: pan-y;
+}
+
+/* Navegadores modernos: usar aspect-ratio nativo */
+@supports (aspect-ratio: 1 / 1) {
+  .hero-slides {
+    aspect-ratio: 1412 / 690;
+    padding-bottom: 0;
+  }
 }
 
 .hero-slide {
@@ -160,8 +170,10 @@ img {
   100% { transform: scale(1.10) translate(-1.5%, -0.6%); }
 }
 
-.hero-slider:hover .hero-slide.is-active img {
-  animation-play-state: paused;
+@media (hover: hover) {
+  .hero-slider:hover .hero-slide.is-active img {
+    animation-play-state: paused;
+  }
 }
 
 /* Destellos decorativos flotantes */
@@ -230,9 +242,15 @@ img {
 .hero-nav-prev { left: 22px; }
 .hero-nav-next { right: 22px; }
 
-.hero-slider:hover .hero-nav,
-.hero-nav:focus-visible {
-  opacity: 1;
+.hero-nav:focus-visible { opacity: 1; }
+
+@media (hover: hover) {
+  .hero-slider:hover .hero-nav { opacity: 1; }
+}
+
+/* En dispositivos táctiles las flechas se ven siempre */
+@media (hover: none) {
+  .hero-nav { opacity: 0.85; }
 }
 
 .hero-nav:hover {
@@ -312,16 +330,18 @@ img {
 /* Responsive: ajustes para móvil */
 @media (max-width: 768px) {
   .hero-nav {
-    width: 40px;
-    height: 40px;
-    opacity: 0.85; /* siempre visibles en móvil porque no hay hover */
+    width: 38px;
+    height: 38px;
+    opacity: 0.85;
+    background: rgba(255, 255, 255, 0.28);
+    border-width: 1px;
   }
-  .hero-nav svg { width: 18px; height: 18px; }
-  .hero-nav-prev { left: 10px; }
-  .hero-nav-next { right: 10px; }
+  .hero-nav svg { width: 16px; height: 16px; }
+  .hero-nav-prev { left: 8px; }
+  .hero-nav-next { right: 8px; }
 
   .hero-dots {
-    bottom: 14px;
+    bottom: 12px;
     padding: 6px 10px;
     gap: 7px;
   }
@@ -330,7 +350,22 @@ img {
 
   .hero-progress { height: 2px; }
 
-  .hero-sparkle { display: none; } /* menos ruido visual en móvil */
+  .hero-sparkle { display: none; }
+}
+
+@media (max-width: 480px) {
+  .hero-nav {
+    width: 34px;
+    height: 34px;
+  }
+  .hero-nav svg { width: 14px; height: 14px; }
+  .hero-dots {
+    bottom: 10px;
+    padding: 5px 9px;
+    gap: 6px;
+  }
+  .hero-dot { width: 6px; height: 6px; }
+  .hero-dot.is-active { width: 18px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

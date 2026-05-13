@@ -649,11 +649,58 @@
                 });
             });
 
-            if (prevBtn) prevBtn.addEventListener('click', () => { prev(); startTimer(); });
-            if (nextBtn) nextBtn.addEventListener('click', () => { next(); startTimer(); });
+            if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); prev(); startTimer(); });
+            if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); next(); startTimer(); });
 
-            slider.addEventListener('mouseenter', stopTimer);
-            slider.addEventListener('mouseleave', startTimer);
+            // Pause-on-hover SOLO en dispositivos con hover real (escritorio).
+            // En táctil, mouseenter dispara al tocar pero mouseleave rara vez,
+            // lo que dejaba el autoplay congelado.
+            const hoverMQ = window.matchMedia('(hover: hover)');
+            if (hoverMQ.matches) {
+                slider.addEventListener('mouseenter', stopTimer);
+                slider.addEventListener('mouseleave', startTimer);
+            }
+
+            // ---- Soporte de swipe táctil ----
+            let touchStartX = 0;
+            let touchStartY = 0;
+            let touchDeltaX = 0;
+            let touchDeltaY = 0;
+            let isSwiping = false;
+            const SWIPE_THRESHOLD = 40; // px mínimos para considerar swipe
+
+            slider.addEventListener('touchstart', (e) => {
+                if (!e.touches || e.touches.length !== 1) return;
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+                touchDeltaX = 0;
+                touchDeltaY = 0;
+                isSwiping = true;
+                stopTimer();
+            }, { passive: true });
+
+            slider.addEventListener('touchmove', (e) => {
+                if (!isSwiping || !e.touches || e.touches.length !== 1) return;
+                touchDeltaX = e.touches[0].clientX - touchStartX;
+                touchDeltaY = e.touches[0].clientY - touchStartY;
+            }, { passive: true });
+
+            slider.addEventListener('touchend', () => {
+                if (!isSwiping) return;
+                isSwiping = false;
+                // Solo cambiar slide si el movimiento horizontal supera el umbral
+                // y es mayor que el vertical (para no interferir con scroll de página)
+                if (Math.abs(touchDeltaX) > SWIPE_THRESHOLD &&
+                    Math.abs(touchDeltaX) > Math.abs(touchDeltaY)) {
+                    if (touchDeltaX < 0) next(); else prev();
+                }
+                startTimer();
+            });
+
+            slider.addEventListener('touchcancel', () => {
+                isSwiping = false;
+                startTimer();
+            });
 
             restartProgress();
             startTimer();
