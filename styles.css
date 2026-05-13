@@ -662,82 +662,126 @@ img {
   overflow: hidden;
 }
 
+/* LOGO rotatorio: primer ítem de la secuencia, hace zoom desde el centro */
+.floating-word-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 90%;
+  max-height: 95%;
+  width: auto;
+  opacity: 0;
+  transform-origin: center center;
+  transform: translate(-50%, -50%) scale(0.05);
+  animation: wordGrowTwinkle 21s ease-in-out infinite;
+  animation-delay: 0s;
+  filter: drop-shadow(0 0 10px rgba(166, 133, 201, 0.6))
+          drop-shadow(0 0 20px rgba(94, 221, 148, 0.4));
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
 .floating-word {
   position: absolute;
   top: 50%;
   left: 50%;
   font-family: 'Advent Pro', 'Montserrat', sans-serif;
   font-weight: 700;
-  font-size: 2.2rem;
+  font-size: clamp(2rem, 8vw, 5rem);
   letter-spacing: 1.5px;
   white-space: nowrap;
   opacity: 0;
   transform-origin: center center;
   transform: translate(-50%, -50%) scale(0.05);
-  animation: wordGrowTwinkle 18s ease-in-out infinite;
-  text-shadow: 0 1px 4px rgba(255, 255, 255, 0.9),
-               0 0 18px rgba(255, 255, 255, 0.55),
-               0 2px 6px rgba(0, 0, 0, 0.18);
+  animation: wordGrowTwinkle 21s ease-in-out infinite;
   will-change: transform, opacity;
 }
 
-/* Cada palabra entra secuencialmente cada 3s (ciclo total 18s con 6 palabras) */
-.floating-word.word-1 { animation-delay: 0s;  color: var(--green-dark); }
-.floating-word.word-2 { animation-delay: 3s;  color: var(--purple-dark); }
-.floating-word.word-3 { animation-delay: 6s;  color: var(--green-dark); }
-.floating-word.word-4 { animation-delay: 9s;  color: var(--purple-dark); }
-.floating-word.word-5 { animation-delay: 12s; color: var(--green-dark); }
-.floating-word.word-6 { animation-delay: 15s; color: var(--purple-dark); }
+/* Palabras verdes con halo neón verde + matiz morado */
+.floating-word.word-1,
+.floating-word.word-3,
+.floating-word.word-5 {
+  color: var(--green-dark);
+  text-shadow:
+    0 0 8px rgba(94, 221, 148, 0.95),
+    0 0 18px rgba(94, 221, 148, 0.85),
+    0 0 30px rgba(94, 221, 148, 0.6),
+    0 0 45px rgba(94, 221, 148, 0.4),
+    0 0 65px rgba(166, 133, 201, 0.35);
+}
 
-/* Responsive */
+/* Palabras moradas con halo neón morado + matiz verde */
+.floating-word.word-2,
+.floating-word.word-4,
+.floating-word.word-6 {
+  color: var(--purple-dark);
+  text-shadow:
+    0 0 8px rgba(166, 133, 201, 0.95),
+    0 0 18px rgba(166, 133, 201, 0.85),
+    0 0 30px rgba(166, 133, 201, 0.6),
+    0 0 45px rgba(166, 133, 201, 0.4),
+    0 0 65px rgba(94, 221, 148, 0.35);
+}
+
+/* Secuencia: cada ítem entra cada 3s (7 ítems en ciclo de 21s) */
+.floating-word.word-1 { animation-delay: 3s;  }
+.floating-word.word-2 { animation-delay: 6s;  }
+.floating-word.word-3 { animation-delay: 9s;  }
+.floating-word.word-4 { animation-delay: 12s; }
+.floating-word.word-5 { animation-delay: 15s; }
+.floating-word.word-6 { animation-delay: 18s; }
+
+/* Responsive: ajustar tamaño del logo según el alto del header */
 @media (max-width: 768px) {
-  .floating-word { font-size: 1.75rem; letter-spacing: 1px; }
+  .floating-word-logo { height: 110%; max-height: 110%; }
 }
 
 @media (max-width: 480px) {
-  .floating-word { font-size: 1.45rem; letter-spacing: 0.5px; }
+  .floating-word-logo { height: 120%; max-height: 120%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .floating-word { animation: none; opacity: 0.85; transform: translate(-50%, -50%) scale(1); }
+  .floating-word { display: none; }
+  .floating-word-logo { display: none; }
 }
 
-/* Animación única: la palabra emerge desde el centro pequeñita,
-   crece al tamaño grande, titila tres veces y se desvanece expandiéndose.
-   Con 6 palabras y ciclo de 18s, cada una toma 3s del ciclo y queda invisible el resto. */
+/* Animación única para el logo y las 6 palabras.
+   Cada ítem emerge desde el centro pequeño, crece al tamaño grande,
+   titila tres veces y se desvanece expandiéndose.
+   Con 7 ítems (logo + 6 palabras) y ciclo de 21s, cada uno ocupa ~3s. */
 @keyframes wordGrowTwinkle {
   0% {
     opacity: 0;
     transform: translate(-50%, -50%) scale(0.05);
   }
-  /* Emerge desde el centro: pequeña y casi invisible */
-  1.5% {
+  /* Emerge desde el centro */
+  1% {
     opacity: 0.4;
     transform: translate(-50%, -50%) scale(0.25);
   }
-  /* Crece y se hace visible */
-  5% {
+  /* Crece visible */
+  4% {
     opacity: 0.95;
     transform: translate(-50%, -50%) scale(0.85);
   }
   /* Tamaño completo */
-  8% {
+  7% {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
   }
-  /* TITILA - parpadeos rápidos */
-  10% { opacity: 0.35; transform: translate(-50%, -50%) scale(1); }
-  11% { opacity: 1;    transform: translate(-50%, -50%) scale(1.04); }
-  12% { opacity: 0.4;  transform: translate(-50%, -50%) scale(1); }
-  13% { opacity: 1;    transform: translate(-50%, -50%) scale(1.06); }
-  14% { opacity: 0.45; transform: translate(-50%, -50%) scale(1); }
-  15% { opacity: 1;    transform: translate(-50%, -50%) scale(1.08); }
+  /* TITILA - tres parpadeos con micro-zoom */
+  8.5%  { opacity: 0.35; transform: translate(-50%, -50%) scale(1); }
+  9.5%  { opacity: 1;    transform: translate(-50%, -50%) scale(1.04); }
+  10.5% { opacity: 0.4;  transform: translate(-50%, -50%) scale(1); }
+  11.5% { opacity: 1;    transform: translate(-50%, -50%) scale(1.06); }
+  12.5% { opacity: 0.45; transform: translate(-50%, -50%) scale(1); }
+  13.5% { opacity: 1;    transform: translate(-50%, -50%) scale(1.08); }
   /* Desaparece expandiéndose ligeramente */
-  17% {
+  14.5% {
     opacity: 0;
     transform: translate(-50%, -50%) scale(1.3);
   }
-  /* Espera hasta el próximo ciclo, invisible y pequeña */
+  /* Espera hasta el próximo ciclo */
   100% {
     opacity: 0;
     transform: translate(-50%, -50%) scale(0.05);
@@ -911,6 +955,15 @@ img {
   display: inline-block;
 }
 
+/* En el header, el logo estático queda oculto porque ahora forma parte
+   de la animación rotativa dentro de .floating-words-container */
+.floating-header .logo-wrapper {
+  visibility: hidden;
+  pointer-events: none;
+  width: 1px;
+  height: 100%;
+}
+
 .logo-header-main {
   width: 100%;
   max-width: 100%;
@@ -923,6 +976,14 @@ img {
   border: none;
   z-index: 2;
   object-fit: contain;
+}
+
+/* En reducción de movimiento, mostramos el logo estático como fallback */
+@media (prefers-reduced-motion: reduce) {
+  .floating-header .logo-wrapper {
+    visibility: visible;
+    width: auto;
+  }
 }
 
 
