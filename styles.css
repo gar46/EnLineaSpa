@@ -662,23 +662,49 @@ img {
   overflow: hidden;
 }
 
-/* LOGO rotatorio: primer ítem de la secuencia, hace zoom desde el centro */
+/* LOGO rotatorio: primer ítem de la secuencia, hace zoom desde el centro
+   con un halo neón pulsante (mismo estilo que el "10% descuento") */
 .floating-word-logo {
   position: absolute;
   top: 50%;
   left: 50%;
-  height: 90%;
-  max-height: 95%;
+  height: 130%;
+  max-height: 140%;
   width: auto;
   opacity: 0;
   transform-origin: center center;
   transform: translate(-50%, -50%) scale(0.05);
-  animation: wordGrowTwinkle 21s ease-in-out infinite;
-  animation-delay: 0s;
-  filter: drop-shadow(0 0 10px rgba(166, 133, 201, 0.6))
-          drop-shadow(0 0 20px rgba(94, 221, 148, 0.4));
-  will-change: transform, opacity;
+  animation: wordGrowTwinkle 21s ease-in-out infinite,
+             logoNeonPulse 2s ease-in-out infinite alternate;
+  animation-delay: 0s, 0s;
+  filter:
+    drop-shadow(0 0 8px rgba(166, 133, 201, 0.95))
+    drop-shadow(0 0 18px rgba(166, 133, 201, 0.85))
+    drop-shadow(0 0 32px rgba(166, 133, 201, 0.6))
+    drop-shadow(0 0 50px rgba(94, 221, 148, 0.45))
+    drop-shadow(0 0 75px rgba(94, 221, 148, 0.3));
+  will-change: transform, opacity, filter;
   pointer-events: none;
+}
+
+/* Pulso neón del logo (alterna entre dos intensidades de glow) */
+@keyframes logoNeonPulse {
+  0% {
+    filter:
+      drop-shadow(0 0 8px rgba(166, 133, 201, 0.95))
+      drop-shadow(0 0 18px rgba(166, 133, 201, 0.85))
+      drop-shadow(0 0 32px rgba(166, 133, 201, 0.6))
+      drop-shadow(0 0 50px rgba(94, 221, 148, 0.45))
+      drop-shadow(0 0 75px rgba(94, 221, 148, 0.3));
+  }
+  100% {
+    filter:
+      drop-shadow(0 0 14px rgba(166, 133, 201, 1))
+      drop-shadow(0 0 28px rgba(166, 133, 201, 1))
+      drop-shadow(0 0 46px rgba(166, 133, 201, 0.85))
+      drop-shadow(0 0 70px rgba(94, 221, 148, 0.65))
+      drop-shadow(0 0 100px rgba(94, 221, 148, 0.45));
+  }
 }
 
 .floating-word {
@@ -731,13 +757,13 @@ img {
 .floating-word.word-5 { animation-delay: 15s; }
 .floating-word.word-6 { animation-delay: 18s; }
 
-/* Responsive: ajustar tamaño del logo según el alto del header */
+/* Responsive: el logo crece más en pantallas pequeñas para mayor presencia */
 @media (max-width: 768px) {
-  .floating-word-logo { height: 110%; max-height: 110%; }
+  .floating-word-logo { height: 150%; max-height: 160%; }
 }
 
 @media (max-width: 480px) {
-  .floating-word-logo { height: 120%; max-height: 120%; }
+  .floating-word-logo { height: 160%; max-height: 170%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
