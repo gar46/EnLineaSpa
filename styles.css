@@ -665,15 +665,15 @@ img {
 .floating-word {
   position: absolute;
   font-family: 'Advent Pro', 'Montserrat', sans-serif;
-  font-weight: 300;
-  font-size: 1.3rem;
-  color: var(--purple);
-  opacity: 0.4;
+  font-weight: 600;
+  font-size: 1.35rem;
+  color: var(--purple-dark);
+  opacity: 0.85;
   transform-origin: center;
   animation: floatWord 12s ease-in-out infinite;
   letter-spacing: 2px;
   white-space: nowrap;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8), 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .floating-word.word-1 {
@@ -682,8 +682,8 @@ img {
   transform: rotate(-18deg);
   animation: floatWord1 12s ease-in-out infinite;
   animation-delay: 0s;
-  color: var(--green);
-  font-size: 1.2rem;
+  color: var(--green-dark);
+  font-size: 1.25rem;
 }
 
 .floating-word.word-2 {
@@ -692,8 +692,8 @@ img {
   transform: rotate(22deg);
   animation: floatWord2 14s ease-in-out infinite;
   animation-delay: 1.5s;
-  color: var(--purple);
-  font-size: 1.15rem;
+  color: var(--purple-dark);
+  font-size: 1.2rem;
 }
 
 .floating-word.word-3 {
@@ -703,7 +703,7 @@ img {
   animation: floatWord3 13s ease-in-out infinite;
   animation-delay: 3s;
   color: var(--green-dark);
-  font-size: 1.3rem;
+  font-size: 1.35rem;
 }
 
 .floating-word.word-4 {
@@ -713,7 +713,7 @@ img {
   animation: floatWord4 15s ease-in-out infinite;
   animation-delay: 4.5s;
   color: var(--purple-dark);
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .floating-word.word-5 {
@@ -722,8 +722,8 @@ img {
   transform: rotate(-25deg);
   animation: floatWord5 16s ease-in-out infinite;
   animation-delay: 6s;
-  color: var(--green-light);
-  font-size: 1.25rem;
+  color: var(--green-dark);
+  font-size: 1.3rem;
 }
 
 .floating-word.word-6 {
@@ -732,18 +732,18 @@ img {
   transform: rotate(15deg);
   animation: floatWord6 11s ease-in-out infinite;
   animation-delay: 2s;
-  color: var(--purple-light);
-  font-size: 1.2rem;
+  color: var(--purple-dark);
+  font-size: 1.25rem;
 }
 
 /* Animaciones individuales para cada palabra con movimientos más naturales */
 @keyframes floatWord1 {
   0% {
     transform: translateX(-150px) translateY(0) rotate(-18deg);
-    opacity: 0.2;
+    opacity: 0.88;
   }
   10% {
-    opacity: 0.5;
+    opacity: 0.88;
     transform: translateX(0) translateY(8px) rotate(-12deg);
   }
   25% {
@@ -751,28 +751,28 @@ img {
   }
   50% {
     transform: translateX(calc(50vw - 100px)) translateY(12px) rotate(8deg);
-    opacity: 0.6;
+    opacity: 0.92;
   }
   75% {
     transform: translateX(calc(75vw - 60px)) translateY(-8px) rotate(18deg);
   }
   90% {
-    opacity: 0.4;
+    opacity: 0.78;
     transform: translateX(calc(90vw + 20px)) translateY(5px) rotate(25deg);
   }
   100% {
     transform: translateX(calc(100vw + 180px)) translateY(-10px) rotate(32deg);
-    opacity: 0.2;
+    opacity: 0.88;
   }
 }
 
 @keyframes floatWord2 {
   0% {
     transform: translateX(-170px) translateY(0) rotate(22deg);
-    opacity: 0.2;
+    opacity: 0.88;
   }
   12% {
-    opacity: 0.5;
+    opacity: 0.88;
     transform: translateX(0) translateY(-10px) rotate(18deg);
   }
   30% {
@@ -780,28 +780,28 @@ img {
   }
   50% {
     transform: translateX(calc(50vw - 110px)) translateY(-12px) rotate(-5deg);
-    opacity: 0.65;
+    opacity: 0.92;
   }
   70% {
     transform: translateX(calc(70vw - 50px)) translateY(8px) rotate(-15deg);
   }
   88% {
-    opacity: 0.4;
+    opacity: 0.78;
     transform: translateX(calc(88vw + 30px)) translateY(-5px) rotate(-22deg);
   }
   100% {
     transform: translateX(calc(100vw + 200px)) translateY(15px) rotate(-28deg);
-    opacity: 0.2;
+    opacity: 0.88;
   }
 }
 
 @keyframes floatWord3 {
   0% {
     transform: translateX(-180px) translateY(0) rotate(-12deg);
-    opacity: 0.2;
+    opacity: 0.88;
   }
   8% {
-    opacity: 0.5;
+    opacity: 0.88;
     transform: translateX(-20px) translateY(12px) rotate(-8deg);
   }
   35% {
@@ -809,28 +809,28 @@ img {
   }
   50% {
     transform: translateX(calc(50vw - 120px)) translateY(15px) rotate(15deg);
-    opacity: 0.7;
+    opacity: 0.95;
   }
   65% {
     transform: translateX(calc(65vw - 70px)) translateY(-10px) rotate(22deg);
   }
   92% {
-    opacity: 0.4;
+    opacity: 0.78;
     transform: translateX(calc(92vw + 40px)) translateY(8px) rotate(28deg);
   }
   100% {
     transform: translateX(calc(100vw + 220px)) translateY(-12px) rotate(35deg);
-    opacity: 0.2;
+    opacity: 0.88;
   }
 }
 
 @keyframes floatWord4 {
   0% {
     transform: translateX(-160px) translateY(0) rotate(28deg);
-    opacity: 0.2;
+    opacity: 0.88;
   }
   15% {
-    opacity: 0.5;
+    opacity: 0.88;
     transform: translateX(10px) translateY(-8px) rotate(25deg);
   }
   28% {
@@ -838,28 +838,28 @@ img {
   }
   50% {
     transform: translateX(calc(50vw - 105px)) translateY(-18px) rotate(8deg);
-    opacity: 0.65;
+    opacity: 0.92;
   }
   72% {
     transform: translateX(calc(72vw - 45px)) translateY(10px) rotate(-5deg);
   }
   85% {
-    opacity: 0.4;
+    opacity: 0.78;
     transform: translateX(calc(85vw + 25px)) translateY(-8px) rotate(-12deg);
   }
   100% {
     transform: translateX(calc(100vw + 190px)) translateY(14px) rotate(-18deg);
-    opacity: 0.2;
+    opacity: 0.88;
   }
 }
 
 @keyframes floatWord5 {
   0% {
     transform: translateX(-175px) translateY(0) rotate(-25deg);
-    opacity: 0.2;
+    opacity: 0.88;
   }
   9% {
-    opacity: 0.5;
+    opacity: 0.88;
     transform: translateX(-15px) translateY(15px) rotate(-20deg);
   }
   32% {
@@ -867,28 +867,28 @@ img {
   }
   50% {
     transform: translateX(calc(50vw - 115px)) translateY(18px) rotate(5deg);
-    opacity: 0.7;
+    opacity: 0.95;
   }
   68% {
     transform: translateX(calc(68vw - 55px)) translateY(-12px) rotate(18deg);
   }
   91% {
-    opacity: 0.4;
+    opacity: 0.78;
     transform: translateX(calc(91vw + 35px)) translateY(10px) rotate(25deg);
   }
   100% {
     transform: translateX(calc(100vw + 210px)) translateY(-15px) rotate(32deg);
-    opacity: 0.2;
+    opacity: 0.88;
   }
 }
 
 @keyframes floatWord6 {
   0% {
     transform: translateX(-165px) translateY(0) rotate(15deg);
-    opacity: 0.2;
+    opacity: 0.88;
   }
   11% {
-    opacity: 0.5;
+    opacity: 0.88;
     transform: translateX(5px) translateY(-12px) rotate(12deg);
   }
   27% {
@@ -896,18 +896,18 @@ img {
   }
   50% {
     transform: translateX(calc(50vw - 108px)) translateY(-16px) rotate(-8deg);
-    opacity: 0.65;
+    opacity: 0.92;
   }
   73% {
     transform: translateX(calc(73vw - 48px)) translateY(12px) rotate(-18deg);
   }
   89% {
-    opacity: 0.4;
+    opacity: 0.78;
     transform: translateX(calc(89vw + 28px)) translateY(-10px) rotate(-25deg);
   }
   100% {
     transform: translateX(calc(100vw + 195px)) translateY(16px) rotate(-30deg);
-    opacity: 0.2;
+    opacity: 0.88;
   }
 }
 
@@ -1043,7 +1043,7 @@ img {
     opacity: 0;
   }
   3% {
-    opacity: 0.7;
+    opacity: 0.95;
     transform: translateX(-20px) translateY(8px) rotate(60deg) scale(0.9);
   }
   15% {
@@ -1061,10 +1061,10 @@ img {
   }
   85% {
     transform: translateX(calc(85vw - 15px)) translateY(-5px) rotate(350deg) scale(0.85);
-    opacity: 0.7;
+    opacity: 0.95;
   }
   97% {
-    opacity: 0.5;
+    opacity: 0.88;
     transform: translateX(calc(100vw + 20px)) translateY(12px) rotate(358deg) scale(0.75);
   }
   100% {
@@ -2286,6 +2286,17 @@ img {
   
   .floating-header {
     padding: 8px 15px;
+    min-height: auto;
+  }
+  .logo-header-main {
+    width: auto !important;
+    max-width: 240px !important;
+    height: 85px !important;
+    max-height: 85px !important;
+    margin: 0 auto !important;
+  }
+  .header-content {
+    min-height: 85px;
   }
   .slide-title {
     font-size: 2.2rem;
@@ -2312,13 +2323,6 @@ img {
 
   .slider-nav.next {
     right: 10px;
-  }
-
-  .logo-header-main {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    max-height: none;
   }
 
   .header-content {
@@ -2537,7 +2541,7 @@ img {
   }
 
   .floating-header {
-    padding: 5px 10px !important;
+    padding: 6px 10px !important;
     margin: 0 !important;
     margin-bottom: 0 !important;
     border-bottom: none;
@@ -2546,17 +2550,18 @@ img {
   }
 
   .logo-header-main {
-    width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-    max-height: none !important;
+    width: auto !important;
+    max-width: 200px !important;
+    height: 70px !important;
+    max-height: 70px !important;
     display: block;
-    margin: 0;
+    margin: 0 auto;
   }
   
   .header-content {
     padding: 0;
     margin: 0;
+    min-height: 70px;
   }
   
   /* SOLUCIÓN DEFINITIVA MOBILE: Sin espacios, ancho completo, fondo degradado */
